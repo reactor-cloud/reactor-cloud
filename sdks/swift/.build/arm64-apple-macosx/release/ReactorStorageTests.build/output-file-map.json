@@ -1,0 +1,13 @@
+{
+  "": {
+    "dependencies": "/Users/cdelconde/Dev/Github/Lab/Reactor/sdks/swift/.build/arm64-apple-macosx/release/ReactorStorageTests.build/ReactorStorageTests.d",
+    "object": "/Users/cdelconde/Dev/Github/Lab/Reactor/sdks/swift/.build/arm64-apple-macosx/release/ReactorStorageTests.build/ReactorStorageTests.o",
+    "swift-dependencies": "/Users/cdelconde/Dev/Github/Lab/Reactor/sdks/swift/.build/arm64-apple-macosx/release/ReactorStorageTests.build/primary.swiftdeps"
+  },
+  "/Users/cdelconde/Dev/Github/Lab/Reactor/sdks/swift/Tests/ReactorStorageTests/ReactorStorageTests.swift": {
+    "object": "/Users/cdelconde/Dev/Github/Lab/Reactor/sdks/swift/.build/arm64-apple-macosx/release/ReactorStorageTests.build/ReactorStorageTests.swift.o",
+    "swiftmodule": "/Users/cdelconde/Dev/Github/Lab/Reactor/sdks/swift/.build/arm64-apple-macosx/release/ReactorStorageTests.build/ReactorStorageTests~partial.swiftmodule",
+    "swift-dependencies": "/Users/cdelconde/Dev/Github/Lab/Reactor/sdks/swift/.build/arm64-apple-macosx/release/ReactorStorageTests.build/ReactorStorageTests.swiftdeps",
+    "diagnostics": "/Users/cdelconde/Dev/Github/Lab/Reactor/sdks/swift/.build/arm64-apple-macosx/release/ReactorStorageTests.build/ReactorStorageTests.dia"
+  }
+}

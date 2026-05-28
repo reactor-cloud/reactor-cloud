@@ -1,0 +1,46 @@
+[package]
+name = "reactor-data-server"
+version = "0.1.0"
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "Reactor Data server binary"
+
+[[bin]]
+name = "reactor-data-server"
+path = "src/main.rs"
+
+[dependencies]
+# Workspace crates
+reactor-core.workspace = true
+reactor-data.workspace = true
+reactor-auth.workspace = true
+
+# Async runtime
+tokio.workspace = true
+
+# Web framework
+axum.workspace = true
+tower.workspace = true
+tower-http.workspace = true
+
+# Serialization
+serde.workspace = true
+serde_json.workspace = true
+
+# Database
+sqlx.workspace = true
+
+# Error handling
+anyhow.workspace = true
+
+# Observability
+tracing.workspace = true
+tracing-subscriber.workspace = true
+
+# HTTP client (for RemoteAuthClient)
+reqwest.workspace = true
+
+# Config
+figment.workspace = true

@@ -1,0 +1,30 @@
+id: l3-add-route
+level: L3
+domain:
+  - reactor
+  - api
+phases:
+  - plan
+  - execute
+  - verify
+fixture:
+  kind: template
+  path: reactor-skeleton-basic
+instruction: |
+  Add a `/status` HTTP GET route that returns a JSON response with `{"version": "0.1.0", "uptime": <seconds since start>}`. The uptime should be calculated dynamically.
+success:
+  - kind: all
+    scorers:
+      - kind: cargo_check
+      - kind: regex_in
+        file: src/main.rs
+        pattern: "/status"
+      - kind: regex_in
+        file: src/main.rs
+        pattern: "version"
+budget:
+  max_tool_calls: 35
+  max_tokens: 50000
+  max_wallclock_secs: 200
+runs_required: 1
+pass_threshold: 1.0

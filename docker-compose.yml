@@ -1,0 +1,24 @@
+# Docker Compose for Reactor local development
+# Usage: docker compose up -d postgres
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: reactor-postgres
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-reactor}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-reactor}
+      POSTGRES_DB: ${POSTGRES_DB:-reactor}
+    ports:
+      - "${POSTGRES_PORT:-5434}:5432"
+    volumes:
+      - reactor-pg-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-reactor} -d ${POSTGRES_DB:-reactor}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+volumes:
+  reactor-pg-data:

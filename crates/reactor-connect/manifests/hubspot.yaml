@@ -1,0 +1,127 @@
+# HubSpot Connector Manifest
+# License: MIT (Airbyte Low-Code CDK compatible)
+# Users must provide their own OAuth client_id/client_secret
+version: "0.1.0"
+type: DeclarativeSource
+
+definitions:
+  oauth_authenticator:
+    type: OAuthAuthenticator
+    client_id: "{{ config['client_id'] }}"
+    client_secret: "{{ config['client_secret'] }}"
+    token_refresh_endpoint: "https://api.hubapi.com/oauth/v1/token"
+    refresh_token: "{{ config['refresh_token'] }}"
+    refresh_request_body:
+      grant_type: refresh_token
+
+  base_requester:
+    type: HttpRequester
+    url_base: "https://api.hubapi.com"
+    authenticator:
+      $ref: "#/definitions/oauth_authenticator"
+    http_method: GET
+    request_headers:
+      Content-Type: application/json
+
+  base_paginator:
+    type: DefaultPaginator
+    pagination_strategy:
+      type: CursorPagination
+      cursor_value: "{{ response.paging.next.after }}"
+      stop_condition: "{{ response.paging is not defined }}"
+    page_token_option:
+      type: RequestOption
+      inject_into: request_parameter
+      field_name: after
+
+  base_retriever:
+    type: SimpleRetriever
+    requester:
+      $ref: "#/definitions/base_requester"
+    paginator:
+      $ref: "#/definitions/base_paginator"
+    record_selector:
+      type: RecordSelector
+      extractor:
+        type: DpathExtractor
+        field_path: ["results"]
+
+  contacts_stream:
+    type: DeclarativeStream
+    name: contacts
+    primary_key: id
+    retriever:
+      $ref: "#/definitions/base_retriever"
+      requester:
+        $ref: "#/definitions/base_requester"
+        path: /crm/v3/objects/contacts
+    schema_loader:
+      type: InlineSchemaLoader
+      schema:
+        $schema: "http://json-schema.org/draft-07/schema#"
+        type: object
+        properties:
+          id:
+            type: string
+          properties:
+            type: object
+          createdAt:
+            type: string
+          updatedAt:
+            type: string
+
+  companies_stream:
+    type: DeclarativeStream
+    name: companies
+    primary_key: id
+    retriever:
+      $ref: "#/definitions/base_retriever"
+      requester:
+        $ref: "#/definitions/base_requester"
+        path: /crm/v3/objects/companies
+
+  deals_stream:
+    type: DeclarativeStream
+    name: deals
+    primary_key: id
+    retriever:
+      $ref: "#/definitions/base_retriever"
+      requester:
+        $ref: "#/definitions/base_requester"
+        path: /crm/v3/objects/deals
+
+check:
+  type: CheckStream
+  stream_names:
+    - contacts
+
+spec:
+  type: Spec
+  connection_specification:
+    $schema: http://json-schema.org/draft-07/schema#
+    type: object
+    required:
+      - client_id
+      - client_secret
+      - refresh_token
+    properties:
+      client_id:
+        type: string
+        title: Client ID
+        description: Your HubSpot OAuth client ID
+        airbyte_secret: true
+      client_secret:
+        type: string
+        title: Client Secret
+        description: Your HubSpot OAuth client secret
+        airbyte_secret: true
+      refresh_token:
+        type: string
+        title: Refresh Token
+        description: Your HubSpot OAuth refresh token
+        airbyte_secret: true
+
+streams:
+  - $ref: "#/definitions/contacts_stream"
+  - $ref: "#/definitions/companies_stream"
+  - $ref: "#/definitions/deals_stream"

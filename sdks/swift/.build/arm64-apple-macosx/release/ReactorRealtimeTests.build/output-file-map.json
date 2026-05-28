@@ -1,0 +1,13 @@
+{
+  "": {
+    "dependencies": "/Users/cdelconde/Dev/Github/Lab/Reactor/sdks/swift/.build/arm64-apple-macosx/release/ReactorRealtimeTests.build/ReactorRealtimeTests.d",
+    "object": "/Users/cdelconde/Dev/Github/Lab/Reactor/sdks/swift/.build/arm64-apple-macosx/release/ReactorRealtimeTests.build/ReactorRealtimeTests.o",
+    "swift-dependencies": "/Users/cdelconde/Dev/Github/Lab/Reactor/sdks/swift/.build/arm64-apple-macosx/release/ReactorRealtimeTests.build/primary.swiftdeps"
+  },
+  "/Users/cdelconde/Dev/Github/Lab/Reactor/sdks/swift/Tests/ReactorRealtimeTests/ReactorRealtimeTests.swift": {
+    "object": "/Users/cdelconde/Dev/Github/Lab/Reactor/sdks/swift/.build/arm64-apple-macosx/release/ReactorRealtimeTests.build/ReactorRealtimeTests.swift.o",
+    "swiftmodule": "/Users/cdelconde/Dev/Github/Lab/Reactor/sdks/swift/.build/arm64-apple-macosx/release/ReactorRealtimeTests.build/ReactorRealtimeTests~partial.swiftmodule",
+    "swift-dependencies": "/Users/cdelconde/Dev/Github/Lab/Reactor/sdks/swift/.build/arm64-apple-macosx/release/ReactorRealtimeTests.build/ReactorRealtimeTests.swiftdeps",
+    "diagnostics": "/Users/cdelconde/Dev/Github/Lab/Reactor/sdks/swift/.build/arm64-apple-macosx/release/ReactorRealtimeTests.build/ReactorRealtimeTests.dia"
+  }
+}

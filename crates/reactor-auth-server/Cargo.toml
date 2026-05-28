@@ -1,0 +1,36 @@
+[package]
+name = "reactor-auth-server"
+version = "0.1.0"
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "Standalone authentication server for Reactor.cloud"
+
+[[bin]]
+name = "reactor-auth-server"
+path = "src/main.rs"
+
+[dependencies]
+# Workspace crates
+reactor-core.workspace = true
+reactor-auth.workspace = true
+
+# Async runtime
+tokio.workspace = true
+
+# Web framework
+axum.workspace = true
+
+# Database
+sqlx.workspace = true
+
+# Observability
+tracing.workspace = true
+tracing-subscriber.workspace = true
+
+# Config
+figment.workspace = true
+
+# Error handling
+anyhow.workspace = true

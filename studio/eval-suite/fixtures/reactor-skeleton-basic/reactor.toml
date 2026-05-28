@@ -1,0 +1,6 @@
+[project]
+name = "test-reactor-app"
+version = "0.1.0"
+
+[server]
+port = 8080

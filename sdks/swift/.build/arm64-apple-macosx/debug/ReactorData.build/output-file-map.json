@@ -1,0 +1,26 @@
+{
+  "": {
+    "swift-dependencies": "/Users/cdelconde/Dev/Github/Lab/Reactor/sdks/swift/.build/arm64-apple-macosx/debug/ReactorData.build/primary.swiftdeps"
+  },
+  "/Users/cdelconde/Dev/Github/Lab/Reactor/sdks/swift/Sources/ReactorData/DataClient.swift": {
+    "dependencies": "/Users/cdelconde/Dev/Github/Lab/Reactor/sdks/swift/.build/arm64-apple-macosx/debug/ReactorData.build/DataClient.d",
+    "object": "/Users/cdelconde/Dev/Github/Lab/Reactor/sdks/swift/.build/arm64-apple-macosx/debug/ReactorData.build/DataClient.swift.o",
+    "swiftmodule": "/Users/cdelconde/Dev/Github/Lab/Reactor/sdks/swift/.build/arm64-apple-macosx/debug/ReactorData.build/DataClient~partial.swiftmodule",
+    "swift-dependencies": "/Users/cdelconde/Dev/Github/Lab/Reactor/sdks/swift/.build/arm64-apple-macosx/debug/ReactorData.build/DataClient.swiftdeps",
+    "diagnostics": "/Users/cdelconde/Dev/Github/Lab/Reactor/sdks/swift/.build/arm64-apple-macosx/debug/ReactorData.build/DataClient.dia"
+  },
+  "/Users/cdelconde/Dev/Github/Lab/Reactor/sdks/swift/Sources/ReactorData/Exports.swift": {
+    "dependencies": "/Users/cdelconde/Dev/Github/Lab/Reactor/sdks/swift/.build/arm64-apple-macosx/debug/ReactorData.build/Exports.d",
+    "object": "/Users/cdelconde/Dev/Github/Lab/Reactor/sdks/swift/.build/arm64-apple-macosx/debug/ReactorData.build/Exports.swift.o",
+    "swiftmodule": "/Users/cdelconde/Dev/Github/Lab/Reactor/sdks/swift/.build/arm64-apple-macosx/debug/ReactorData.build/Exports~partial.swiftmodule",
+    "swift-dependencies": "/Users/cdelconde/Dev/Github/Lab/Reactor/sdks/swift/.build/arm64-apple-macosx/debug/ReactorData.build/Exports.swiftdeps",
+    "diagnostics": "/Users/cdelconde/Dev/Github/Lab/Reactor/sdks/swift/.build/arm64-apple-macosx/debug/ReactorData.build/Exports.dia"
+  },
+  "/Users/cdelconde/Dev/Github/Lab/Reactor/sdks/swift/Sources/ReactorData/QueryBuilder.swift": {
+    "dependencies": "/Users/cdelconde/Dev/Github/Lab/Reactor/sdks/swift/.build/arm64-apple-macosx/debug/ReactorData.build/QueryBuilder.d",
+    "object": "/Users/cdelconde/Dev/Github/Lab/Reactor/sdks/swift/.build/arm64-apple-macosx/debug/ReactorData.build/QueryBuilder.swift.o",
+    "swiftmodule": "/Users/cdelconde/Dev/Github/Lab/Reactor/sdks/swift/.build/arm64-apple-macosx/debug/ReactorData.build/QueryBuilder~partial.swiftmodule",
+    "swift-dependencies": "/Users/cdelconde/Dev/Github/Lab/Reactor/sdks/swift/.build/arm64-apple-macosx/debug/ReactorData.build/QueryBuilder.swiftdeps",
+    "diagnostics": "/Users/cdelconde/Dev/Github/Lab/Reactor/sdks/swift/.build/arm64-apple-macosx/debug/ReactorData.build/QueryBuilder.dia"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "": {
+    "dependencies": "/Users/cdelconde/Dev/Github/Lab/Reactor/sdks/swift/.build/arm64-apple-macosx/release/ReactorSites.build/ReactorSites.d",
+    "object": "/Users/cdelconde/Dev/Github/Lab/Reactor/sdks/swift/.build/arm64-apple-macosx/release/ReactorSites.build/ReactorSites.o",
+    "swift-dependencies": "/Users/cdelconde/Dev/Github/Lab/Reactor/sdks/swift/.build/arm64-apple-macosx/release/ReactorSites.build/primary.swiftdeps"
+  },
+  "/Users/cdelconde/Dev/Github/Lab/Reactor/sdks/swift/Sources/ReactorSites/Exports.swift": {
+    "object": "/Users/cdelconde/Dev/Github/Lab/Reactor/sdks/swift/.build/arm64-apple-macosx/release/ReactorSites.build/Exports.swift.o",
+    "swiftmodule": "/Users/cdelconde/Dev/Github/Lab/Reactor/sdks/swift/.build/arm64-apple-macosx/release/ReactorSites.build/Exports~partial.swiftmodule",
+    "swift-dependencies": "/Users/cdelconde/Dev/Github/Lab/Reactor/sdks/swift/.build/arm64-apple-macosx/release/ReactorSites.build/Exports.swiftdeps",
+    "diagnostics": "/Users/cdelconde/Dev/Github/Lab/Reactor/sdks/swift/.build/arm64-apple-macosx/release/ReactorSites.build/Exports.dia"
+  },
+  "/Users/cdelconde/Dev/Github/Lab/Reactor/sdks/swift/Sources/ReactorSites/SitesClient.swift": {
+    "object": "/Users/cdelconde/Dev/Github/Lab/Reactor/sdks/swift/.build/arm64-apple-macosx/release/ReactorSites.build/SitesClient.swift.o",
+    "swiftmodule": "/Users/cdelconde/Dev/Github/Lab/Reactor/sdks/swift/.build/arm64-apple-macosx/release/ReactorSites.build/SitesClient~partial.swiftmodule",
+    "swift-dependencies": "/Users/cdelconde/Dev/Github/Lab/Reactor/sdks/swift/.build/arm64-apple-macosx/release/ReactorSites.build/SitesClient.swiftdeps",
+    "diagnostics": "/Users/cdelconde/Dev/Github/Lab/Reactor/sdks/swift/.build/arm64-apple-macosx/release/ReactorSites.build/SitesClient.dia"
+  }
+}

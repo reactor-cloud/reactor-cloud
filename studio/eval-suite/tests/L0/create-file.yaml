@@ -1,0 +1,21 @@
+id: l0-create-file
+level: L0
+domain:
+  - tool
+  - file
+phases:
+  - execute
+fixture:
+  kind: empty
+instruction: |
+  Create a file called `hello.txt` in the root directory with the content "Hello, World!".
+success:
+  - kind: file_exists
+    path: hello.txt
+    contains: "Hello, World!"
+budget:
+  max_tool_calls: 5
+  max_tokens: 5000
+  max_wallclock_secs: 30
+runs_required: 1
+pass_threshold: 1.0

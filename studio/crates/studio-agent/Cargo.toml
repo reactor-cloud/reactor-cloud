@@ -1,0 +1,21 @@
+[package]
+name = "studio-agent"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[dependencies]
+studio-protocol = { path = "../studio-protocol" }
+studio-providers = { path = "../studio-providers" }
+studio-storage = { path = "../studio-storage" }
+studio-memory = { path = "../studio-memory" }
+studio-tools = { path = "../studio-tools" }
+studio-tracing = { path = "../studio-tracing" }
+serde = { workspace = true }
+serde_json = { workspace = true }
+tokio = { workspace = true }
+async-trait = { workspace = true }
+futures = { workspace = true }
+thiserror = { workspace = true }
+tokio-util = "0.7"
+chrono = { workspace = true }

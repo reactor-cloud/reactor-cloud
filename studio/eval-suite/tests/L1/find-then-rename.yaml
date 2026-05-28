@@ -1,0 +1,29 @@
+id: l1-find-then-rename
+level: L1
+domain:
+  - tool
+  - file
+  - refactor
+phases:
+  - plan
+  - execute
+fixture:
+  kind: template
+  path: l1-rename-fixture
+instruction: |
+  Find the function named `oldFunctionName` in any TypeScript file, and rename it to `newFunctionName` in all places where it's defined or called.
+success:
+  - kind: all
+    scorers:
+      - kind: command_exit
+        cmd: "! grep -r 'oldFunctionName' . --include='*.ts'"
+        exit_code: 0
+      - kind: regex_in
+        file: src/main.ts
+        pattern: "newFunctionName"
+budget:
+  max_tool_calls: 20
+  max_tokens: 25000
+  max_wallclock_secs: 120
+runs_required: 1
+pass_threshold: 1.0

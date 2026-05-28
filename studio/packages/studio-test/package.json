@@ -1,0 +1,51 @@
+{
+  "name": "@reactor-studio/test",
+  "version": "0.1.0",
+  "description": "Testing harness and CLI for Reactor Studio",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "bin": {
+    "studio-test": "./dist/cli.js"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./client": {
+      "import": "./dist/client.js",
+      "types": "./dist/client.d.ts"
+    },
+    "./harness": {
+      "import": "./dist/harness.js",
+      "types": "./dist/harness.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "test": "tsx src/scripts/smoke.ts",
+    "lint": "eslint src --ext .ts"
+  },
+  "dependencies": {
+    "commander": "^12.0.0",
+    "eventsource-parser": "^1.1.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "tsx": "^4.7.0",
+    "typescript": "^5.4.0"
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "keywords": [
+    "reactor",
+    "studio",
+    "testing",
+    "harness"
+  ],
+  "license": "MIT"
+}

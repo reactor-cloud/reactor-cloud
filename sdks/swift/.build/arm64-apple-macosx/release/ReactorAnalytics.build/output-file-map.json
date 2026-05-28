@@ -1,0 +1,19 @@
+{
+  "": {
+    "dependencies": "/Users/cdelconde/Dev/Github/Lab/Reactor/sdks/swift/.build/arm64-apple-macosx/release/ReactorAnalytics.build/ReactorAnalytics.d",
+    "object": "/Users/cdelconde/Dev/Github/Lab/Reactor/sdks/swift/.build/arm64-apple-macosx/release/ReactorAnalytics.build/ReactorAnalytics.o",
+    "swift-dependencies": "/Users/cdelconde/Dev/Github/Lab/Reactor/sdks/swift/.build/arm64-apple-macosx/release/ReactorAnalytics.build/primary.swiftdeps"
+  },
+  "/Users/cdelconde/Dev/Github/Lab/Reactor/sdks/swift/Sources/ReactorAnalytics/AnalyticsClient.swift": {
+    "object": "/Users/cdelconde/Dev/Github/Lab/Reactor/sdks/swift/.build/arm64-apple-macosx/release/ReactorAnalytics.build/AnalyticsClient.swift.o",
+    "swiftmodule": "/Users/cdelconde/Dev/Github/Lab/Reactor/sdks/swift/.build/arm64-apple-macosx/release/ReactorAnalytics.build/AnalyticsClient~partial.swiftmodule",
+    "swift-dependencies": "/Users/cdelconde/Dev/Github/Lab/Reactor/sdks/swift/.build/arm64-apple-macosx/release/ReactorAnalytics.build/AnalyticsClient.swiftdeps",
+    "diagnostics": "/Users/cdelconde/Dev/Github/Lab/Reactor/sdks/swift/.build/arm64-apple-macosx/release/ReactorAnalytics.build/AnalyticsClient.dia"
+  },
+  "/Users/cdelconde/Dev/Github/Lab/Reactor/sdks/swift/Sources/ReactorAnalytics/Exports.swift": {
+    "object": "/Users/cdelconde/Dev/Github/Lab/Reactor/sdks/swift/.build/arm64-apple-macosx/release/ReactorAnalytics.build/Exports.swift.o",
+    "swiftmodule": "/Users/cdelconde/Dev/Github/Lab/Reactor/sdks/swift/.build/arm64-apple-macosx/release/ReactorAnalytics.build/Exports~partial.swiftmodule",
+    "swift-dependencies": "/Users/cdelconde/Dev/Github/Lab/Reactor/sdks/swift/.build/arm64-apple-macosx/release/ReactorAnalytics.build/Exports.swiftdeps",
+    "diagnostics": "/Users/cdelconde/Dev/Github/Lab/Reactor/sdks/swift/.build/arm64-apple-macosx/release/ReactorAnalytics.build/Exports.dia"
+  }
+}

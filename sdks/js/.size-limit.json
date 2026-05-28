@@ -1,0 +1,56 @@
+[
+  {
+    "name": "@reactor/shared",
+    "path": "packages/shared/dist/index.js",
+    "limit": "5 kB",
+    "gzip": true
+  },
+  {
+    "name": "@reactor/auth",
+    "path": "packages/auth/dist/index.js",
+    "limit": "8 kB",
+    "gzip": true
+  },
+  {
+    "name": "@reactor/data",
+    "path": "packages/data/dist/index.js",
+    "limit": "6 kB",
+    "gzip": true
+  },
+  {
+    "name": "@reactor/storage",
+    "path": "packages/storage/dist/index.js",
+    "limit": "3 kB",
+    "gzip": true
+  },
+  {
+    "name": "@reactor/functions",
+    "path": "packages/functions/dist/index.js",
+    "limit": "2.5 kB",
+    "gzip": true
+  },
+  {
+    "name": "@reactor/jobs",
+    "path": "packages/jobs/dist/index.js",
+    "limit": "2.5 kB",
+    "gzip": true
+  },
+  {
+    "name": "@reactor/sites",
+    "path": "packages/sites/dist/index.js",
+    "limit": "2 kB",
+    "gzip": true
+  },
+  {
+    "name": "@reactor/realtime",
+    "path": "packages/realtime/dist/index.js",
+    "limit": "1 kB",
+    "gzip": true
+  },
+  {
+    "name": "@reactor/client",
+    "path": "packages/client/dist/index.js",
+    "limit": "22 kB",
+    "gzip": true
+  }
+]

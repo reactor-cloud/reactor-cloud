@@ -1,0 +1,19 @@
+{
+  "name": "hello",
+  "version": 0,
+  "runtime": "wasm",
+  "entrypoint": "code/main.wasm",
+  "limits": {
+    "timeout_ms": 30000,
+    "memory_mb": 64,
+    "max_body_in_mb": 1,
+    "max_body_out_mb": 1
+  },
+  "concurrency": {
+    "min_instances": 0,
+    "max_concurrency": 10
+  },
+  "env_keys": [],
+  "secret_keys": [],
+  "forward_authorization": false
+}

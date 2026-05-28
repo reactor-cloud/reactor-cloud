@@ -1,0 +1,138 @@
+[package]
+name = "reactor-server"
+version = "0.1.0"
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "Unified Reactor.cloud server binary for G1/G2 topologies"
+
+[[bin]]
+name = "reactor-server"
+path = "src/main.rs"
+
+[lib]
+name = "reactor_server"
+path = "src/lib.rs"
+
+[dependencies]
+# Async runtime
+tokio.workspace = true
+
+# Web framework
+axum.workspace = true
+tower.workspace = true
+tower-http.workspace = true
+
+# Serialization
+serde.workspace = true
+serde_json.workspace = true
+base64.workspace = true
+
+# Database
+sqlx.workspace = true
+
+# Error handling
+thiserror.workspace = true
+anyhow.workspace = true
+
+# Observability
+tracing.workspace = true
+tracing-subscriber.workspace = true
+
+# HTTP client
+reqwest.workspace = true
+url.workspace = true
+
+# Async utilities
+async-trait.workspace = true
+futures.workspace = true
+
+# Time
+chrono.workspace = true
+
+# IDs
+uuid.workspace = true
+
+# Crypto (for constant-time compare)
+subtle.workspace = true
+
+# Caching
+moka = { workspace = true }
+dashmap = { workspace = true, optional = true }
+
+# Cloud API (Phase 3+)
+reactor-cloud-api = { workspace = true, optional = true }
+
+# Bytes for multipart
+bytes.workspace = true
+
+# Temp files for deploy
+tempfile.workspace = true
+
+# Config
+figment.workspace = true
+
+# Multipart parsing for deploy endpoint
+multer = "3"
+
+# Metrics
+metrics = "0.23"
+metrics-exporter-prometheus = "0.15"
+
+# Directory traversal for deploy
+walkdir.workspace = true
+
+# MIME type detection for deploy
+mime_guess.workspace = true
+
+# OpenAPI
+utoipa.workspace = true
+
+# Workspace crates
+reactor-core.workspace = true
+reactor-cache.workspace = true
+reactor-vault.workspace = true
+reactor-deploy-bundle = { path = "../reactor-deploy-bundle" }
+
+# Capability crates (feature-gated)
+reactor-ai = { workspace = true, optional = true }
+reactor-analytics = { workspace = true, optional = true }
+reactor-auth = { workspace = true, optional = true }
+reactor-data = { workspace = true, optional = true }
+reactor-storage = { workspace = true, optional = true, features = ["s3"] }
+reactor-functions = { workspace = true, optional = true }
+reactor-jobs = { workspace = true, optional = true }
+reactor-sites = { workspace = true, optional = true }
+reactor-connect = { workspace = true, optional = true }
+reactor-gateway = { workspace = true, optional = true }
+reactor-ops = { workspace = true, optional = true }
+
+[dev-dependencies]
+tempfile = "3"
+testcontainers.workspace = true
+testcontainers-modules.workspace = true
+proptest.workspace = true
+
+[features]
+default = ["g2-full"]
+
+# Topology bundles
+g1-tauri = ["cap-analytics", "cap-auth", "cap-data", "cap-storage", "cap-functions", "cap-jobs"]
+g2-full = ["cap-analytics", "cap-auth", "cap-data", "cap-storage", "cap-functions", "cap-jobs", "cap-sites", "cap-cloud", "cap-connect", "cap-ops"]
+
+# Capability gates
+cap-ai = ["dep:reactor-ai"]
+cap-analytics = ["dep:reactor-analytics"]
+cap-auth = ["dep:reactor-auth"]
+cap-data = ["dep:reactor-data"]
+cap-storage = ["dep:reactor-storage"]
+cap-functions = ["dep:reactor-functions"]
+cap-jobs = ["dep:reactor-jobs"]
+cap-sites = ["dep:reactor-sites"]
+cap-cloud = ["dep:reactor-cloud-api", "dep:dashmap", "dep:reactor-gateway"]
+cap-connect = ["dep:reactor-connect"]
+cap-ops = ["dep:reactor-ops", "cap-auth"]
+
+# Vault backends
+openbao = ["reactor-vault/openbao"]

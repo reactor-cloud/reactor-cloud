@@ -1,0 +1,30 @@
+id: l2-with-file-storage
+level: L2
+domain:
+  - reactor
+  - storage
+phases:
+  - plan
+  - execute
+  - verify
+fixture:
+  kind: tarball
+  path: reactor-blank.tar.gz
+instruction: |
+  Add file storage capability using reactor.cloud's storage feature. Create an `/upload` POST endpoint that accepts file uploads and returns a storage URL.
+success:
+  - kind: all
+    scorers:
+      - kind: cargo_check
+      - kind: regex_in
+        file: src/
+        pattern: "upload"
+      - kind: regex_in
+        file: reactor.toml
+        pattern: "storage"
+budget:
+  max_tool_calls: 40
+  max_tokens: 60000
+  max_wallclock_secs: 240
+runs_required: 1
+pass_threshold: 1.0

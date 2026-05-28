@@ -1,0 +1,3 @@
+module ReactorAuth {
+    header "/Users/cdelconde/Dev/Github/Lab/Reactor/sdks/swift/.build/arm64-apple-macosx/debug/ReactorAuth.build/include/ReactorAuth-Swift.h"
+}

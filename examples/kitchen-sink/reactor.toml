@@ -1,0 +1,7 @@
+project_id = "ssr-smoke-test"
+name = "ssr-smoke-test"
+
+[[sites]]
+name = "ssr-smoke"
+source = "."
+framework = "nextjs"

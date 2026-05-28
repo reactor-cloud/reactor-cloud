@@ -1,0 +1,111 @@
+# Intercom Connector Manifest
+# License: MIT (Airbyte Low-Code CDK compatible)
+version: "0.1.0"
+type: DeclarativeSource
+
+definitions:
+  bearer_authenticator:
+    type: BearerAuthenticator
+    api_token: "{{ config['access_token'] }}"
+
+  base_requester:
+    type: HttpRequester
+    url_base: "https://api.intercom.io"
+    authenticator:
+      $ref: "#/definitions/bearer_authenticator"
+    http_method: GET
+    request_headers:
+      Accept: application/json
+      Intercom-Version: "2.9"
+
+  cursor_paginator:
+    type: DefaultPaginator
+    pagination_strategy:
+      type: CursorPagination
+      cursor_value: "{{ response.pages.next.starting_after }}"
+      stop_condition: "{{ response.pages.next is not defined }}"
+    page_token_option:
+      type: RequestOption
+      inject_into: request_parameter
+      field_name: starting_after
+
+  contacts_stream:
+    type: DeclarativeStream
+    name: contacts
+    primary_key: id
+    retriever:
+      type: SimpleRetriever
+      requester:
+        $ref: "#/definitions/base_requester"
+        path: /contacts
+      paginator:
+        $ref: "#/definitions/cursor_paginator"
+      record_selector:
+        type: RecordSelector
+        extractor:
+          type: DpathExtractor
+          field_path: ["data"]
+
+  conversations_stream:
+    type: DeclarativeStream
+    name: conversations
+    primary_key: id
+    retriever:
+      type: SimpleRetriever
+      requester:
+        $ref: "#/definitions/base_requester"
+        path: /conversations
+      paginator:
+        $ref: "#/definitions/cursor_paginator"
+      record_selector:
+        type: RecordSelector
+        extractor:
+          type: DpathExtractor
+          field_path: ["conversations"]
+
+  companies_stream:
+    type: DeclarativeStream
+    name: companies
+    primary_key: id
+    retriever:
+      type: SimpleRetriever
+      requester:
+        $ref: "#/definitions/base_requester"
+        path: /companies
+        http_method: POST
+        request_body_json:
+          query:
+            field: created_at
+            operator: ">"
+            value: 0
+      paginator:
+        $ref: "#/definitions/cursor_paginator"
+      record_selector:
+        type: RecordSelector
+        extractor:
+          type: DpathExtractor
+          field_path: ["data"]
+
+check:
+  type: CheckStream
+  stream_names:
+    - contacts
+
+spec:
+  type: Spec
+  connection_specification:
+    $schema: http://json-schema.org/draft-07/schema#
+    type: object
+    required:
+      - access_token
+    properties:
+      access_token:
+        type: string
+        title: Access Token
+        description: Your Intercom access token
+        airbyte_secret: true
+
+streams:
+  - $ref: "#/definitions/contacts_stream"
+  - $ref: "#/definitions/conversations_stream"
+  - $ref: "#/definitions/companies_stream"

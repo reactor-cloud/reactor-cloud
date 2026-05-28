@@ -1,0 +1,83 @@
+[package]
+name = "reactor-analytics"
+version = "0.1.0"
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "Reactor Analytics capability — product analytics for the Reactor BaaS"
+
+[lib]
+name = "reactor_analytics"
+path = "src/lib.rs"
+
+[features]
+default = []
+
+[dependencies]
+# Workspace crates
+reactor-core.workspace = true
+reactor-policy.workspace = true
+
+# Async runtime
+tokio.workspace = true
+
+# Web framework
+axum.workspace = true
+tower.workspace = true
+tower-http.workspace = true
+
+# Serialization
+serde.workspace = true
+serde_json.workspace = true
+
+# Database
+sqlx.workspace = true
+
+# IDs and time
+uuid.workspace = true
+chrono.workspace = true
+
+# Error handling
+thiserror.workspace = true
+anyhow.workspace = true
+
+# Observability
+tracing.workspace = true
+
+# Crypto (for key hashing)
+argon2.workspace = true
+rand.workspace = true
+sha2.workspace = true
+
+# HTTP client
+url.workspace = true
+reqwest = { workspace = true, features = ["json"] }
+
+# Async utilities
+async-trait.workspace = true
+futures.workspace = true
+
+# Lazy initialization
+once_cell.workspace = true
+
+# Byte buffer utilities
+bytes.workspace = true
+
+# Analytics-specific
+woothee.workspace = true
+maxminddb.workspace = true
+flate2.workspace = true
+
+# Metrics
+metrics.workspace = true
+metrics-exporter-prometheus.workspace = true
+
+# OpenAPI
+utoipa.workspace = true
+
+[dev-dependencies]
+tempfile.workspace = true
+testcontainers.workspace = true
+testcontainers-modules.workspace = true
+tokio = { workspace = true, features = ["test-util"] }

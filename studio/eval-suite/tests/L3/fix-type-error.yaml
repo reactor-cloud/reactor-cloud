@@ -1,0 +1,22 @@
+id: l3-fix-type-error
+level: L3
+domain:
+  - reactor
+  - debug
+phases:
+  - analyze
+  - execute
+  - verify
+fixture:
+  kind: template
+  path: l3-type-error-fixture
+instruction: |
+  The code has a type error: `expected String, found &str`. Find and fix it.
+success:
+  - kind: cargo_check
+budget:
+  max_tool_calls: 20
+  max_tokens: 30000
+  max_wallclock_secs: 120
+runs_required: 1
+pass_threshold: 1.0

@@ -1,0 +1,9 @@
+[project]
+name = "test-reactor-db-app"
+version = "0.1.0"
+
+[server]
+port = 8080
+
+[database]
+url_env = "DATABASE_URL"

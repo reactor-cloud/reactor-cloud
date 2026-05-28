@@ -1,0 +1,250 @@
+[workspace]
+resolver = "2"
+members = [
+    "crates/reactor-core",
+    "crates/reactor-policy",
+    "crates/reactor-auth",
+    "crates/reactor-auth-server",
+    "crates/reactor-data",
+    "crates/reactor-data-server",
+    "crates/reactor-storage",
+    "crates/reactor-storage-server",
+    "crates/reactor-functions",
+    "crates/reactor-functions-server",
+    "crates/reactor-cache",
+    "crates/reactor-jobs",
+    "crates/reactor-jobs-server",
+    "crates/reactor-connect",
+    "crates/reactor-connect-server",
+    "crates/reactor-sites",
+    "crates/reactor-sites-server",
+    "crates/reactor-analytics",
+    "crates/reactor-analytics-server",
+    "crates/reactor-ai",
+    "crates/reactor-ai-server",
+    "crates/reactor-deploy-bundle",
+    "crates/reactor-server",
+    "crates/reactor-dev-bundle-builder",
+    "crates/reactor-client",
+    "crates/reactor-cli",
+    "crates/reactor-vault",
+    "crates/reactor-vault-tests",
+    "crates/reactor-gateway",
+    "crates/reactor-gateway-server",
+    "crates/reactor-cloud-api",
+    "crates/reactor-ops",
+]
+
+[workspace.package]
+edition = "2021"
+rust-version = "1.78"
+license = "Apache-2.0 OR MIT"
+repository = "https://github.com/reactor-cloud/reactor"
+
+[workspace.dependencies]
+# Async runtime
+tokio = { version = "1", features = ["full"] }
+
+# Web framework
+axum = { version = "0.7", features = ["macros", "tracing"] }
+tower = "0.5"
+tower-http = { version = "0.5", features = ["trace", "cors", "request-id"] }
+
+# Serialization
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+# Database
+sqlx = { version = "0.8", features = ["runtime-tokio", "postgres", "uuid", "chrono", "json", "macros"] }
+
+# IDs and time
+uuid = { version = "1", features = ["v7", "serde"] }
+chrono = { version = "0.4", features = ["serde"] }
+
+# Error handling
+thiserror = "1"
+anyhow = "1"
+
+# Observability
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter", "json"] }
+
+# JWT and crypto
+jsonwebtoken = "9"
+argon2 = "0.5"
+rand = "0.8"
+rand_core = { version = "0.6", features = ["std"] }
+subtle = "2"
+aes-gcm = "0.10"
+base64 = "0.22"
+sha2 = "0.10"
+rsa = { version = "0.9", features = ["pem"] }
+
+# HTTP client
+url = { version = "2", features = ["serde"] }
+urlencoding = "2"
+reqwest = { version = "0.12", default-features = false, features = ["json", "rustls-tls"] }
+
+# Async utilities
+async-trait = "0.1"
+
+# MFA (v0.2)
+totp-rs = "5"
+
+# OAuth (v0.2)
+oauth2 = "4"
+
+# Validation
+validator = { version = "0.18", features = ["derive"] }
+
+# Email
+lettre = { version = "0.11", default-features = false, features = ["smtp-transport", "tokio1-rustls-tls", "builder"] }
+
+# Config
+figment = { version = "0.10", features = ["env", "toml"] }
+dotenvy = "0.15"
+
+# Testing
+testcontainers = "0.21"
+testcontainers-modules = { version = "0.9", features = ["postgres", "hashicorp_vault"] }
+proptest = "1"
+
+# SQL parsing and query building
+sqlparser = { version = "0.51", features = ["serde"] }
+nom = "7"
+indexmap = { version = "2", features = ["serde"] }
+itertools = "0.13"
+futures = "0.3"
+hex = "0.4"
+
+# HMAC for signed URLs
+hmac = "0.12"
+
+# Hashing (blake3 for ProjectRef)
+blake3 = "1"
+
+# Encoding (base32 for ProjectRef)
+data-encoding = "2"
+
+# In-memory caching with TTL
+moka = { version = "0.12", features = ["future"] }
+dashmap = "6"
+
+# NATS messaging (Phase 4 multi-tenant)
+async-nats = "0.37"
+
+# Vault client (for OpenBao)
+vaultrs = "0.7"
+vaultrs-login = "0.2"
+
+# Configuration file parsing
+toml = "0.8"
+
+# Byte buffer utilities
+bytes = "1"
+
+# Lazy initialization
+once_cell = "1"
+
+# Regex
+regex = "1"
+
+# WASM runtime
+wasmtime = { version = "25", default-features = false, features = ["async", "cranelift", "component-model"] }
+wasmtime-wasi = "25"
+wasmtime-wasi-http = "25"
+
+# AWS Lambda SDK
+aws-sdk-lambda = "1"
+
+# Zip handling
+zip = "2"
+
+# Tokio utilities
+tokio-util = { version = "0.7", features = ["io"] }
+
+# Unix process management
+nix = { version = "0.29", features = ["signal", "process"] }
+
+# Cron expression parsing
+cron = "0.12"
+
+# AWS SDK (for S3 in storage, Lambda in functions)
+aws-config = "1"
+aws-sdk-s3 = "1"
+
+# Path matching
+matchit = "0.8"
+
+# MIME type detection
+mime_guess = "2"
+
+# ACME client for TLS certificate provisioning (feature-gated)
+rustls-acme = "0.10"
+
+# Workspace crates (for inter-crate dependencies)
+reactor-core = { path = "crates/reactor-core" }
+reactor-policy = { path = "crates/reactor-policy" }
+reactor-auth = { path = "crates/reactor-auth" }
+reactor-data = { path = "crates/reactor-data" }
+reactor-storage = { path = "crates/reactor-storage" }
+reactor-functions = { path = "crates/reactor-functions" }
+reactor-cache = { path = "crates/reactor-cache" }
+reactor-jobs = { path = "crates/reactor-jobs" }
+reactor-connect = { path = "crates/reactor-connect" }
+reactor-sites = { path = "crates/reactor-sites" }
+reactor-analytics = { path = "crates/reactor-analytics" }
+reactor-ai = { path = "crates/reactor-ai" }
+reactor-deploy-bundle = { path = "crates/reactor-deploy-bundle" }
+reactor-server = { path = "crates/reactor-server" }
+
+# Analytics dependencies
+woothee = "0.13"
+maxminddb = "0.24"
+flate2 = "1"
+
+# Compression and archiving (for deploy bundles)
+zstd = "0.13"
+tar = "0.4"
+
+# Multipart parsing
+multer = "3"
+
+# Metrics
+metrics = "0.23"
+metrics-exporter-prometheus = "0.15"
+
+# OpenAPI
+utoipa = { version = "5", features = ["axum_extras", "chrono", "uuid"] }
+
+# Semver
+semver = "1"
+
+# Directory traversal
+walkdir = "2"
+
+# Temporary files (testing)
+tempfile = "3"
+
+# WAT to WASM compilation (dev-only)
+wat = "1"
+
+# CLI
+clap = { version = "4", features = ["derive", "env"] }
+clap_complete = "4"
+keyring = { version = "3", features = ["apple-native"] }
+indicatif = "0.17"
+console = "0.15"
+toml_edit = "0.22"
+dirs = "5"
+ctrlc = "3"
+
+# Workspace CLI crates
+reactor-client = { path = "crates/reactor-client" }
+reactor-cli = { path = "crates/reactor-cli" }
+
+# Vault crate
+reactor-vault = { path = "crates/reactor-vault", default-features = true }
+reactor-gateway = { path = "crates/reactor-gateway", default-features = true }
+reactor-cloud-api = { path = "crates/reactor-cloud-api" }
+reactor-ops = { path = "crates/reactor-ops" }

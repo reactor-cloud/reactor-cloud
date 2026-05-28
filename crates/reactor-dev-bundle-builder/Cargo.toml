@@ -1,0 +1,23 @@
+[package]
+name = "reactor-dev-bundle-builder"
+version = "0.1.0"
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+description = "Dev-only tool for building Reactor deploy bundles from fixtures"
+publish = false
+
+[[bin]]
+name = "reactor-dev-bundle-builder"
+path = "src/main.rs"
+
+[dependencies]
+reactor-deploy-bundle.workspace = true
+anyhow.workspace = true
+hex.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+sha2.workspace = true
+walkdir.workspace = true
+wat.workspace = true
+zip.workspace = true

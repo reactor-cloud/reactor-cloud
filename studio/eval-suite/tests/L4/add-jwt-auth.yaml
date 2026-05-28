@@ -1,0 +1,65 @@
+id: l4-add-jwt-auth
+level: L4
+domain:
+  - reactor
+  - auth
+  - security
+phases:
+  - plan
+  - design
+  - execute
+  - verify
+  - review
+  - complete
+fixture:
+  kind: template
+  path: reactor-skeleton-basic
+instruction: |
+  Add JWT-based authentication to the application:
+  1. Create a JWT token generation and validation module
+  2. Add a `/auth/login` endpoint that accepts email/password and returns a JWT
+  3. Add a `/auth/refresh` endpoint for token refresh
+  4. Create middleware that validates JWT tokens on protected routes
+  5. Add a protected `/api/profile` endpoint that returns user info from the token
+  
+  Use industry best practices for JWT handling (expiration, refresh tokens, secure storage of secrets).
+success:
+  - kind: all
+    scorers:
+      - kind: cargo_check
+      - kind: regex_in
+        file: src/
+        pattern: "jwt|JWT|JsonWebToken"
+      - kind: regex_in
+        file: src/
+        pattern: "/auth/login"
+      - kind: llm_judge
+        rubric: |
+          Evaluate the JWT authentication implementation:
+          
+          MUST HAVE (each worth 20 points):
+          1. JWT token generation with appropriate claims (sub, exp, iat)
+          2. Token validation middleware that rejects invalid/expired tokens
+          3. Refresh token mechanism for extending sessions
+          4. Secure secret handling (not hardcoded, from env or config)
+          5. Protected endpoint that correctly extracts user info from token
+          
+          NICE TO HAVE (each worth 5 points):
+          - Token revocation or blacklist mechanism
+          - Rate limiting on auth endpoints
+          - Proper error responses (401 for invalid, 403 for expired)
+          - Documentation comments explaining the auth flow
+          
+          Score: Sum of points / 100 = final score
+          A score >= 0.7 means the implementation is acceptable.
+        threshold: 0.7
+budget:
+  max_tool_calls: 100
+  max_tokens: 150000
+  max_wallclock_secs: 600
+runs_required: 1
+pass_threshold: 1.0
+model_pin:
+  provider: openrouter
+  model: anthropic/claude-sonnet-4
+  temperature: 0.2

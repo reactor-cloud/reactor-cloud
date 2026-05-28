@@ -1,0 +1,49 @@
+{
+  "name": "@reactor/sdk-workspace",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Reactor JS/TS SDK monorepo",
+  "keywords": ["reactor", "sdk", "typescript"],
+  "license": "MIT",
+  "type": "module",
+  "packageManager": "pnpm@9.14.2",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "scripts": {
+    "build": "turbo run build",
+    "test": "turbo run test",
+    "test:watch": "turbo run test:watch",
+    "typecheck": "turbo run typecheck",
+    "lint": "turbo run lint",
+    "lint:fix": "turbo run lint:fix",
+    "clean": "turbo run clean && rm -rf node_modules",
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\"",
+    "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,json,md}\"",
+    "changeset": "changeset",
+    "changeset:version": "changeset version",
+    "changeset:publish": "pnpm build && changeset publish",
+    "openapi:generate": "tsx scripts/generate.ts",
+    "openapi:check": "tsx scripts/generate.ts && git diff --exit-code packages/shared/src/generated/",
+    "sdk:docs": "typedoc",
+    "sdk:size": "size-limit",
+    "prepublishOnly": "pnpm build && pnpm test"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.27.10",
+    "@types/node": "^22.10.0",
+    "msw": "^2.6.6",
+    "openapi-typescript": "^7.4.4",
+    "prettier": "^3.4.2",
+    "size-limit": "^11.1.6",
+    "@size-limit/preset-small-lib": "^11.1.6",
+    "tsd": "^0.31.2",
+    "tsup": "^8.3.5",
+    "tsx": "^4.19.2",
+    "turbo": "^2.3.3",
+    "typedoc": "^0.28.0",
+    "typedoc-plugin-markdown": "^4.11.0",
+    "typescript": "^5.7.2",
+    "vitest": "^2.1.8"
+  }
+}

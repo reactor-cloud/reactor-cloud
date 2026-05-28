@@ -1,0 +1,15 @@
+name: DCO Check
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  dco:
+    name: DCO Sign-off Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check DCO
+        uses: dcoapp/dco-action@main
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}

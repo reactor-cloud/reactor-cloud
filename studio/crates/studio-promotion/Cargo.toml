@@ -1,0 +1,23 @@
+[package]
+name = "studio-promotion"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "Promotion system for Reactor Studio Foundry: tier transitions, demotion, rollback gate"
+
+[features]
+default = []
+foundry = []
+
+[dependencies]
+studio-lessons = { path = "../studio-lessons" }
+serde = { workspace = true }
+serde_json = { workspace = true }
+tokio = { workspace = true }
+thiserror = { workspace = true }
+chrono = { workspace = true }
+uuid = { workspace = true }
+tracing = { workspace = true }
+
+[dev-dependencies]
+tempfile = { workspace = true }

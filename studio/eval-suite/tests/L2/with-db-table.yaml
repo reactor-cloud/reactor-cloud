@@ -1,0 +1,31 @@
+id: l2-with-db-table
+level: L2
+domain:
+  - reactor
+  - database
+phases:
+  - plan
+  - execute
+  - verify
+fixture:
+  kind: tarball
+  path: reactor-blank.tar.gz
+instruction: |
+  Add a database table called `users` with columns: `id` (uuid, primary key), `email` (text, unique), `created_at` (timestamp). Include the migration file.
+success:
+  - kind: all
+    scorers:
+      - kind: file_exists
+        path: migrations/
+      - kind: regex_in
+        file: migrations/
+        pattern: "users"
+      - kind: regex_in
+        file: migrations/
+        pattern: "email.*text"
+budget:
+  max_tool_calls: 30
+  max_tokens: 50000
+  max_wallclock_secs: 180
+runs_required: 1
+pass_threshold: 1.0

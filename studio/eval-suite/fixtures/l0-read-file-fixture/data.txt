@@ -1,0 +1,3 @@
+This is test data for the read file test.
+It contains multiple lines of content.
+The agent should read this and copy it exactly.

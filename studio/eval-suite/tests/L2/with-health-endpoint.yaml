@@ -1,0 +1,30 @@
+id: l2-with-health-endpoint
+level: L2
+domain:
+  - reactor
+  - api
+phases:
+  - plan
+  - execute
+  - verify
+fixture:
+  kind: tarball
+  path: reactor-blank.tar.gz
+instruction: |
+  Add a `/health` HTTP endpoint that returns a JSON response `{"status": "ok"}` with a 200 status code.
+success:
+  - kind: all
+    scorers:
+      - kind: cargo_check
+      - kind: regex_in
+        file: src/main.rs
+        pattern: "/health"
+      - kind: regex_in
+        file: src/main.rs
+        pattern: "status.*ok"
+budget:
+  max_tool_calls: 30
+  max_tokens: 50000
+  max_wallclock_secs: 180
+runs_required: 1
+pass_threshold: 1.0

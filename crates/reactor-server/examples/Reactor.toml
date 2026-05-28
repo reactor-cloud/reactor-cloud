@@ -1,0 +1,114 @@
+# Example Reactor.toml for reactor-server
+#
+# This file shows all available configuration options with their defaults.
+# Copy to your project root and customize.
+
+[project]
+name = "my-app"
+id = "proj_01HZ..."
+
+[server]
+bind = "0.0.0.0:8000"
+request_timeout_secs = 30
+
+[database]
+url = "postgres://reactor:reactor@localhost:5432/reactor"
+pool_max = 20
+acquire_timeout_secs = 5
+
+[tracing]
+filter = "info,reactor_auth=debug,reactor_data=debug"
+fmt = "json"  # or "pretty" for local dev
+
+[admin]
+token = "your-secure-admin-token-here"
+allow_remote = false  # only allow /_admin/* from 127.0.0.1
+
+# =============================================================================
+# Auth capability
+# =============================================================================
+[auth]
+data_key = "base64-encoded-32-byte-key-here"
+jwt_issuer = "reactor-auth"
+jwt_audience = "reactor"
+access_ttl_secs = 3600       # 1 hour
+refresh_ttl_secs = 2592000   # 30 days
+public_url = "http://localhost:8000"
+
+# Optional SMTP config for email verification
+# [auth.smtp]
+# host = "smtp.example.com"
+# port = 587
+# user = "user"
+# password = "password"
+# from = "noreply@example.com"
+# tls = "starttls"
+
+# =============================================================================
+# Data capability
+# =============================================================================
+[data]
+migrations_dir = "./migrations"
+run_migrations = true
+user_schema = "public"
+max_embed_depth = 5
+max_limit = 1000
+default_limit = 100
+
+# =============================================================================
+# Storage capability
+# =============================================================================
+[storage]
+backend = "fs"  # or "s3"
+fs_base_path = "./.reactor/blobs"
+signing_secret = "your-hmac-signing-secret"
+signed_url_expiry_secs = 3600
+max_upload_size = 104857600  # 100 MB
+
+# For S3 backend:
+# backend = "s3"
+# s3_bucket = "my-bucket"
+# s3_region = "us-east-1"
+# s3_endpoint = "http://localhost:9000"  # for MinIO
+
+# =============================================================================
+# Functions capability
+# =============================================================================
+[functions]
+workdir = "./.reactor/functions"
+data_key = "base64-encoded-32-byte-key-for-env-secrets"
+runtimes = ["wasm"]  # or ["wasm", "bun"] or ["wasm", "bun", "lambda"]
+invoke_default_timeout_ms = 30000
+invoke_max_timeout_ms = 300000
+bundle_max_bytes = 52428800  # 50 MiB
+
+# Bun runtime config (if bun in runtimes)
+bun_bin = "bun"
+bun_idle_ttl_secs = 300
+bun_max_instances_per_fn = 8
+
+# Lambda runtime config (if lambda in runtimes)
+# lambda_region = "us-east-1"
+# lambda_role_arn = "arn:aws:iam::123456789:role/reactor-lambda"
+# lambda_bundle_s3_bucket = "reactor-lambda-bundles"
+
+# =============================================================================
+# Jobs capability
+# =============================================================================
+[jobs]
+worker_count = 4
+scheduler_interval_ms = 1000
+default_timeout_ms = 600000   # 10 minutes
+max_timeout_ms = 3600000      # 1 hour
+webhook_secret = "your-webhook-encryption-secret"
+max_org_concurrent_runs = 50
+max_payload_bytes = 1048576   # 1 MiB
+
+# =============================================================================
+# Sites capability
+# =============================================================================
+[sites]
+workdir = "./.reactor/sites"
+bundle_max_bytes = 524288000  # 500 MiB
+isr_enabled = true
+isr_default_revalidate_secs = 60

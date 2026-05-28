@@ -1,0 +1,3 @@
+module ReactorSites {
+    header "/Users/cdelconde/Dev/Github/Lab/Reactor/sdks/swift/.build/arm64-apple-macosx/release/ReactorSites.build/include/ReactorSites-Swift.h"
+}

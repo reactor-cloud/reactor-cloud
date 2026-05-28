@@ -1,0 +1,53 @@
+[package]
+name = "reactor-cloud-api"
+version = "0.1.0"
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "Control plane API for multi-tenant Reactor Cloud"
+
+[dependencies]
+# Async runtime
+tokio = { workspace = true }
+
+# Serialization
+serde = { workspace = true }
+serde_json = { workspace = true }
+
+# Database
+sqlx = { workspace = true }
+
+# IDs and time
+uuid = { workspace = true }
+chrono = { workspace = true }
+
+# Error handling
+thiserror = { workspace = true }
+anyhow = { workspace = true }
+
+# Observability
+tracing = { workspace = true }
+
+# Async utilities
+async-trait = { workspace = true }
+
+# Crypto
+rand = { workspace = true }
+base64 = { workspace = true }
+hex = { workspace = true }
+
+# JWT
+jsonwebtoken = { workspace = true }
+
+# Workspace crates
+reactor-core = { workspace = true }
+reactor-vault = { workspace = true }
+reactor-gateway = { workspace = true }
+
+[features]
+default = []
+test-utils = []
+
+[dev-dependencies]
+tokio = { workspace = true, features = ["rt-multi-thread", "macros"] }

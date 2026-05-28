@@ -1,0 +1,13 @@
+{
+  "$schema": "https://unpkg.com/@changesets/config@3.0.4/schema.json",
+  "changelog": "@changesets/cli/changelog",
+  "commit": false,
+  "fixed": [],
+  "linked": [
+    ["@reactor/client", "@reactor/shared", "@reactor/auth", "@reactor/data", "@reactor/storage", "@reactor/functions", "@reactor/jobs", "@reactor/sites", "@reactor/realtime"]
+  ],
+  "access": "public",
+  "baseBranch": "main",
+  "updateInternalDependencies": "patch",
+  "ignore": []
+}

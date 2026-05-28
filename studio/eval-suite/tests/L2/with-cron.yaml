@@ -1,0 +1,30 @@
+id: l2-with-cron
+level: L2
+domain:
+  - reactor
+  - cron
+phases:
+  - plan
+  - execute
+  - verify
+fixture:
+  kind: tarball
+  path: reactor-blank.tar.gz
+instruction: |
+  Add a cron job that runs daily at midnight (0 0 * * *) to clean up expired sessions. Configure it in reactor.toml and implement the cleanup logic.
+success:
+  - kind: all
+    scorers:
+      - kind: cargo_check
+      - kind: regex_in
+        file: reactor.toml
+        pattern: "cron"
+      - kind: regex_in
+        file: reactor.toml
+        pattern: "0 0 \\* \\* \\*"
+budget:
+  max_tool_calls: 30
+  max_tokens: 50000
+  max_wallclock_secs: 180
+runs_required: 1
+pass_threshold: 1.0

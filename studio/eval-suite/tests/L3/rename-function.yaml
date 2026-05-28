@@ -1,0 +1,30 @@
+id: l3-rename-function
+level: L3
+domain:
+  - reactor
+  - refactor
+phases:
+  - plan
+  - execute
+  - verify
+fixture:
+  kind: template
+  path: reactor-skeleton-with-db
+instruction: |
+  Rename the `SendEmailJob` struct to `EmailNotificationJob` and update all references across the codebase.
+success:
+  - kind: all
+    scorers:
+      - kind: cargo_check
+      - kind: command_exit
+        cmd: "! grep -r 'SendEmailJob' src/"
+        exit_code: 0
+      - kind: regex_in
+        file: src/jobs/
+        pattern: "EmailNotificationJob"
+budget:
+  max_tool_calls: 30
+  max_tokens: 40000
+  max_wallclock_secs: 180
+runs_required: 1
+pass_threshold: 1.0

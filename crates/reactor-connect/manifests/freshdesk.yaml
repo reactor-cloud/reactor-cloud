@@ -1,0 +1,94 @@
+# Freshdesk Connector Manifest
+# License: MIT (Airbyte Low-Code CDK compatible)
+version: "0.1.0"
+type: DeclarativeSource
+
+definitions:
+  basic_authenticator:
+    type: BasicHttpAuthenticator
+    username: "{{ config['api_key'] }}"
+    password: X
+
+  base_requester:
+    type: HttpRequester
+    url_base: "https://{{ config['domain'] }}.freshdesk.com/api/v2"
+    authenticator:
+      $ref: "#/definitions/basic_authenticator"
+    http_method: GET
+
+  page_paginator:
+    type: DefaultPaginator
+    pagination_strategy:
+      type: PageIncrement
+      page_size: 100
+      start_from_page: 1
+    page_token_option:
+      type: RequestOption
+      inject_into: request_parameter
+      field_name: page
+    page_size_option:
+      type: RequestOption
+      inject_into: request_parameter
+      field_name: per_page
+
+  tickets_stream:
+    type: DeclarativeStream
+    name: tickets
+    primary_key: id
+    retriever:
+      type: SimpleRetriever
+      requester:
+        $ref: "#/definitions/base_requester"
+        path: /tickets
+      paginator:
+        $ref: "#/definitions/page_paginator"
+      record_selector:
+        type: RecordSelector
+        extractor:
+          type: DpathExtractor
+          field_path: []
+
+  contacts_stream:
+    type: DeclarativeStream
+    name: contacts
+    primary_key: id
+    retriever:
+      type: SimpleRetriever
+      requester:
+        $ref: "#/definitions/base_requester"
+        path: /contacts
+      paginator:
+        $ref: "#/definitions/page_paginator"
+      record_selector:
+        type: RecordSelector
+        extractor:
+          type: DpathExtractor
+          field_path: []
+
+check:
+  type: CheckStream
+  stream_names:
+    - tickets
+
+spec:
+  type: Spec
+  connection_specification:
+    $schema: http://json-schema.org/draft-07/schema#
+    type: object
+    required:
+      - domain
+      - api_key
+    properties:
+      domain:
+        type: string
+        title: Domain
+        description: Your Freshdesk subdomain
+      api_key:
+        type: string
+        title: API Key
+        description: Your Freshdesk API key
+        airbyte_secret: true
+
+streams:
+  - $ref: "#/definitions/tickets_stream"
+  - $ref: "#/definitions/contacts_stream"

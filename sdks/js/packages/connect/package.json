@@ -1,0 +1,29 @@
+{
+  "name": "@reactor/connect",
+  "version": "0.1.0",
+  "description": "Connect client for Reactor JS SDK - connectors and integrations",
+  "keywords": ["reactor", "sdk", "connect", "connectors", "integrations", "api"],
+  "license": "MIT",
+  "author": "Reactor Team",
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "import": { "types": "./dist/index.d.ts", "default": "./dist/index.js" },
+      "require": { "types": "./dist/index.d.cts", "default": "./dist/index.cjs" }
+    },
+    "./package.json": "./package.json"
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsup",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf dist .turbo"
+  },
+  "dependencies": { "@reactor/shared": "workspace:*" },
+  "devDependencies": { "typescript": "^5.7.2", "vitest": "^2.1.8" }
+}

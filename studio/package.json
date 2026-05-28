@@ -1,0 +1,18 @@
+{
+  "name": "reactor-studio",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Reactor Studio - Developer Interface for Reactor",
+  "scripts": {
+    "dev": "pnpm --filter @reactor-studio/app tauri dev",
+    "build": "pnpm --filter @reactor-studio/app tauri build",
+    "lint": "pnpm -r lint"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.0"
+  },
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=9.0.0"
+  }
+}

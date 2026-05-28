@@ -1,0 +1,114 @@
+# Mailchimp Connector Manifest
+# License: MIT (Airbyte Low-Code CDK compatible)
+version: "0.1.0"
+type: DeclarativeSource
+
+definitions:
+  basic_authenticator:
+    type: BasicHttpAuthenticator
+    username: "anystring"
+    password: "{{ config['api_key'] }}"
+
+  base_requester:
+    type: HttpRequester
+    url_base: "https://{{ config['data_center'] }}.api.mailchimp.com/3.0"
+    authenticator:
+      $ref: "#/definitions/basic_authenticator"
+    http_method: GET
+
+  offset_paginator:
+    type: DefaultPaginator
+    pagination_strategy:
+      type: OffsetIncrement
+      page_size: 100
+    page_token_option:
+      type: RequestOption
+      inject_into: request_parameter
+      field_name: offset
+    page_size_option:
+      type: RequestOption
+      inject_into: request_parameter
+      field_name: count
+
+  lists_stream:
+    type: DeclarativeStream
+    name: lists
+    primary_key: id
+    retriever:
+      type: SimpleRetriever
+      requester:
+        $ref: "#/definitions/base_requester"
+        path: /lists
+      paginator:
+        $ref: "#/definitions/offset_paginator"
+      record_selector:
+        type: RecordSelector
+        extractor:
+          type: DpathExtractor
+          field_path: ["lists"]
+
+  campaigns_stream:
+    type: DeclarativeStream
+    name: campaigns
+    primary_key: id
+    retriever:
+      type: SimpleRetriever
+      requester:
+        $ref: "#/definitions/base_requester"
+        path: /campaigns
+      paginator:
+        $ref: "#/definitions/offset_paginator"
+      record_selector:
+        type: RecordSelector
+        extractor:
+          type: DpathExtractor
+          field_path: ["campaigns"]
+
+  automations_stream:
+    type: DeclarativeStream
+    name: automations
+    primary_key: id
+    retriever:
+      type: SimpleRetriever
+      requester:
+        $ref: "#/definitions/base_requester"
+        path: /automations
+      paginator:
+        $ref: "#/definitions/offset_paginator"
+      record_selector:
+        type: RecordSelector
+        extractor:
+          type: DpathExtractor
+          field_path: ["automations"]
+
+check:
+  type: CheckStream
+  stream_names:
+    - lists
+
+spec:
+  type: Spec
+  connection_specification:
+    $schema: http://json-schema.org/draft-07/schema#
+    type: object
+    required:
+      - api_key
+      - data_center
+    properties:
+      api_key:
+        type: string
+        title: API Key
+        description: Your Mailchimp API key
+        airbyte_secret: true
+      data_center:
+        type: string
+        title: Data Center
+        description: "The data center for your Mailchimp account (e.g., us1, us2)"
+        examples:
+          - us1
+          - us2
+
+streams:
+  - $ref: "#/definitions/lists_stream"
+  - $ref: "#/definitions/campaigns_stream"
+  - $ref: "#/definitions/automations_stream"

@@ -1,0 +1,55 @@
+[package]
+name = "reactor-studio"
+version = "0.1.0"
+description = "Reactor Studio - Developer Interface for Reactor"
+authors = ["Reactor Team"]
+edition = "2021"
+rust-version = "1.77"
+
+[lib]
+name = "reactor_studio_lib"
+crate-type = ["lib", "cdylib", "staticlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = [] }
+tauri-plugin-dialog = "2"
+tauri-plugin-fs = "2"
+tauri-plugin-store = "2"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+tokio = { version = "1", features = ["full"] }
+thiserror = "1"
+toml = "0.8"
+chrono = { version = "0.4", features = ["serde"] }
+
+# Studio crates
+studio-protocol = { path = "../../../crates/studio-protocol" }
+studio-providers = { path = "../../../crates/studio-providers" }
+studio-storage = { path = "../../../crates/studio-storage" }
+studio-agent = { path = "../../../crates/studio-agent" }
+studio-task = { path = "../../../crates/studio-task" }
+studio-tracing = { path = "../../../crates/studio-tracing" }
+studio-devserver = { path = "../../../crates/studio-devserver", optional = true, features = ["tauri-integration"] }
+
+# Foundry crates (optional, enabled via feature)
+studio-eval = { path = "../../../crates/studio-eval", optional = true }
+studio-lessons = { path = "../../../crates/studio-lessons", optional = true }
+studio-postmortem = { path = "../../../crates/studio-postmortem", optional = true }
+studio-promotion = { path = "../../../crates/studio-promotion", optional = true }
+uuid = { version = "1", features = ["v4"], optional = true }
+
+tokio-util = "0.7"
+keyring = "3"
+tracing = "0.1"
+
+[target.'cfg(not(any(target_os = "android", target_os = "ios")))'.dependencies]
+tauri-plugin-shell = "2"
+
+[features]
+default = ["custom-protocol", "devserver", "foundry"]
+custom-protocol = ["tauri/custom-protocol"]
+devserver = ["studio-devserver"]
+foundry = ["studio-eval", "studio-lessons", "studio-postmortem", "studio-promotion", "uuid"]

@@ -1,0 +1,22 @@
+id: l0-delete-file
+level: L0
+domain:
+  - tool
+  - file
+phases:
+  - execute
+fixture:
+  kind: template
+  path: l0-delete-fixture
+instruction: |
+  Delete the file called `to_delete.txt` from the root directory.
+success:
+  - kind: command_exit
+    cmd: "test ! -f to_delete.txt"
+    exit_code: 0
+budget:
+  max_tool_calls: 5
+  max_tokens: 5000
+  max_wallclock_secs: 30
+runs_required: 1
+pass_threshold: 1.0

@@ -1,0 +1,231 @@
+# Reactor AI Model Registry
+# This file defines all available models and their routing aliases.
+# Baked into the library at compile time; can be overridden via config.
+
+[providers.openrouter]
+base_url = "https://openrouter.ai/api/v1"
+
+[providers.bedrock]
+# AWS region comes from config
+
+[providers.foundry]
+# Azure Foundry endpoint comes from config
+
+# ============================================================================
+# Concrete Models
+# ============================================================================
+
+# Anthropic models
+[[models]]
+id = "anthropic/claude-opus-4"
+provider = "bedrock"
+upstream_id = "anthropic.claude-opus-4-7"
+fallback = "anthropic/claude-opus-4"
+input_price_per_1m = 15.00
+output_price_per_1m = 75.00
+context_window = 1000000
+capabilities = ["chat", "reasoning", "tools", "vision"]
+speed_class = "slow"
+quality_score = 95
+
+[[models]]
+id = "anthropic/claude-sonnet-4"
+provider = "bedrock"
+upstream_id = "anthropic.claude-sonnet-4-6"
+fallback = "anthropic/claude-sonnet-4"
+input_price_per_1m = 3.00
+output_price_per_1m = 15.00
+context_window = 200000
+capabilities = ["chat", "reasoning", "tools", "vision"]
+speed_class = "fast"
+quality_score = 90
+
+[[models]]
+id = "anthropic/claude-haiku-3.5"
+provider = "bedrock"
+upstream_id = "anthropic.claude-3-5-haiku-20241022-v1:0"
+fallback = "anthropic/claude-3.5-haiku"
+input_price_per_1m = 0.80
+output_price_per_1m = 4.00
+context_window = 200000
+capabilities = ["chat", "tools", "vision"]
+speed_class = "fast"
+quality_score = 75
+
+# OpenAI models via OpenRouter
+[[models]]
+id = "openai/gpt-4o"
+provider = "openrouter"
+upstream_id = "openai/gpt-4o"
+input_price_per_1m = 2.50
+output_price_per_1m = 10.00
+context_window = 128000
+capabilities = ["chat", "reasoning", "tools", "vision"]
+speed_class = "fast"
+quality_score = 88
+
+[[models]]
+id = "openai/gpt-4o-mini"
+provider = "openrouter"
+upstream_id = "openai/gpt-4o-mini"
+input_price_per_1m = 0.15
+output_price_per_1m = 0.60
+context_window = 128000
+capabilities = ["chat", "tools", "vision"]
+speed_class = "fast"
+quality_score = 70
+
+[[models]]
+id = "openai/o1"
+provider = "openrouter"
+upstream_id = "openai/o1"
+input_price_per_1m = 15.00
+output_price_per_1m = 60.00
+context_window = 200000
+capabilities = ["chat", "reasoning"]
+speed_class = "slow"
+quality_score = 92
+
+# OpenAI models via Azure Foundry
+[[models]]
+id = "openai/gpt-5-mini"
+provider = "foundry"
+upstream_id = "gpt-5-mini"
+fallback = "openai/gpt-5-mini"
+input_price_per_1m = 0.25
+output_price_per_1m = 2.00
+context_window = 400000
+capabilities = ["chat", "tools", "vision"]
+speed_class = "fast"
+quality_score = 82
+
+[[models]]
+id = "openai/o4-mini"
+provider = "foundry"
+upstream_id = "o4-mini"
+fallback = "openai/o4-mini"
+input_price_per_1m = 1.10
+output_price_per_1m = 4.40
+context_window = 200000
+capabilities = ["chat", "reasoning", "tools"]
+speed_class = "medium"
+quality_score = 88
+
+# Google models
+[[models]]
+id = "google/gemini-2.5-pro"
+provider = "openrouter"
+upstream_id = "google/gemini-2.5-pro-preview"
+input_price_per_1m = 1.25
+output_price_per_1m = 10.00
+context_window = 1000000
+capabilities = ["chat", "reasoning", "tools", "vision"]
+speed_class = "medium"
+quality_score = 87
+
+# DeepSeek models
+[[models]]
+id = "deepseek/deepseek-v3"
+provider = "openrouter"
+upstream_id = "deepseek/deepseek-chat-v3"
+input_price_per_1m = 0.27
+output_price_per_1m = 1.10
+context_window = 64000
+capabilities = ["chat", "reasoning", "tools"]
+speed_class = "fast"
+quality_score = 82
+
+# ============================================================================
+# Embeddings Models
+# ============================================================================
+
+[[models]]
+id = "openai/text-embedding-3-small"
+provider = "foundry"
+upstream_id = "text-embedding-3-small"
+fallback = "openai/text-embedding-3-small"
+input_price_per_1m = 0.02
+output_price_per_1m = 0.0
+context_window = 8191
+capabilities = ["embeddings"]
+speed_class = "fast"
+quality_score = 70
+
+[[models]]
+id = "openai/text-embedding-3-large"
+provider = "openrouter"
+upstream_id = "openai/text-embedding-3-large"
+input_price_per_1m = 0.13
+output_price_per_1m = 0.0
+context_window = 8191
+capabilities = ["embeddings"]
+speed_class = "fast"
+quality_score = 85
+
+[[models]]
+id = "amazon/titan-embed-text-v2"
+provider = "bedrock"
+upstream_id = "amazon.titan-embed-text-v2:0"
+input_price_per_1m = 0.02
+output_price_per_1m = 0.0
+context_window = 8192
+capabilities = ["embeddings"]
+speed_class = "fast"
+quality_score = 75
+
+# ============================================================================
+# Aliases
+# ============================================================================
+
+[[aliases]]
+pattern = "anthropic/opus/latest"
+resolves_to = "anthropic/claude-opus-4"
+
+[[aliases]]
+pattern = "anthropic/sonnet/latest"
+resolves_to = "anthropic/claude-sonnet-4"
+
+[[aliases]]
+pattern = "reasoning/cheapest"
+strategy = "cheapest_with_capability"
+capability = "reasoning"
+
+[[aliases]]
+pattern = "reasoning/fastest"
+strategy = "fastest_with_capability"
+capability = "reasoning"
+
+[[aliases]]
+pattern = "reasoning/best"
+strategy = "best_value"
+capability = "reasoning"
+
+[[aliases]]
+pattern = "coding/cheapest"
+strategy = "cheapest_with_capability"
+capability = "tools"
+
+[[aliases]]
+pattern = "coding/best-value"
+strategy = "best_value"
+capability = "tools"
+
+[[aliases]]
+pattern = "chat/cheapest"
+strategy = "cheapest_with_capability"
+capability = "chat"
+
+[[aliases]]
+pattern = "vision/cheapest"
+strategy = "cheapest_with_capability"
+capability = "vision"
+
+[[aliases]]
+pattern = "embeddings/cheapest"
+strategy = "cheapest_with_capability"
+capability = "embeddings"
+
+[[aliases]]
+pattern = "embeddings/best"
+strategy = "best_value"
+capability = "embeddings"

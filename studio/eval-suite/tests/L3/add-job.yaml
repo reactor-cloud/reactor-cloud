@@ -1,0 +1,29 @@
+id: l3-add-job
+level: L3
+domain:
+  - reactor
+  - job
+phases:
+  - plan
+  - execute
+  - verify
+fixture:
+  kind: template
+  path: reactor-skeleton-with-db
+instruction: |
+  Add a new background job called `CleanupExpiredSessions` that takes a `max_age_days` parameter. The job should be defined following the pattern of the existing `SendEmailJob`.
+success:
+  - kind: all
+    scorers:
+      - kind: cargo_check
+      - kind: file_exists
+        path: src/jobs/cleanup_expired_sessions.rs
+      - kind: regex_in
+        file: src/jobs/cleanup_expired_sessions.rs
+        pattern: "max_age_days"
+budget:
+  max_tool_calls: 35
+  max_tokens: 50000
+  max_wallclock_secs: 200
+runs_required: 1
+pass_threshold: 1.0

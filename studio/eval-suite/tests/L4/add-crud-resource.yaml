@@ -1,0 +1,68 @@
+id: l4-add-crud-resource
+level: L4
+domain:
+  - reactor
+  - api
+  - database
+phases:
+  - plan
+  - design
+  - execute
+  - verify
+  - review
+  - complete
+fixture:
+  kind: template
+  path: reactor-skeleton-with-db
+instruction: |
+  Add a complete CRUD resource for "Tasks" with the following:
+  1. Database table with columns: id (uuid), title (text), description (text nullable), status (enum: pending/in_progress/completed), created_at, updated_at
+  2. RESTful endpoints:
+     - GET /api/tasks - list all tasks with pagination
+     - GET /api/tasks/:id - get single task
+     - POST /api/tasks - create task
+     - PUT /api/tasks/:id - update task
+     - DELETE /api/tasks/:id - delete task
+  3. Request validation
+  4. Proper error handling with meaningful error messages
+  5. Database migration
+success:
+  - kind: all
+    scorers:
+      - kind: cargo_check
+      - kind: regex_in
+        file: src/
+        pattern: "/api/tasks"
+      - kind: regex_in
+        file: migrations/
+        pattern: "tasks"
+      - kind: llm_judge
+        rubric: |
+          Evaluate the CRUD resource implementation:
+          
+          REQUIRED (each worth 15 points):
+          1. Database migration creates table with all specified columns
+          2. All 5 endpoints are implemented (GET list, GET single, POST, PUT, DELETE)
+          3. Proper pagination on list endpoint
+          4. Input validation on create/update
+          5. Meaningful error messages (not just 500 errors)
+          6. Status enum is properly handled
+          
+          QUALITY (each worth 5 points):
+          - Consistent response format across endpoints
+          - Proper HTTP status codes (201 for create, 204 for delete, etc.)
+          - Timestamps are auto-populated
+          - Soft delete or cascade handling
+          
+          Score: Sum of points / 100 = final score
+        threshold: 0.7
+budget:
+  max_tool_calls: 120
+  max_tokens: 180000
+  max_wallclock_secs: 720
+runs_required: 1
+pass_threshold: 1.0
+model_pin:
+  provider: openrouter
+  model: anthropic/claude-sonnet-4
+  temperature: 0.2

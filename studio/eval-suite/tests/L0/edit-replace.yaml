@@ -1,0 +1,26 @@
+id: l0-edit-replace
+level: L0
+domain:
+  - tool
+  - file
+phases:
+  - execute
+fixture:
+  kind: template
+  path: l0-edit-fixture
+instruction: |
+  Edit the file `config.txt` and replace "OLD_VALUE" with "NEW_VALUE".
+success:
+  - kind: all
+    scorers:
+      - kind: file_exists
+        path: config.txt
+      - kind: regex_in
+        file: config.txt
+        pattern: "NEW_VALUE"
+budget:
+  max_tool_calls: 5
+  max_tokens: 5000
+  max_wallclock_secs: 30
+runs_required: 1
+pass_threshold: 1.0

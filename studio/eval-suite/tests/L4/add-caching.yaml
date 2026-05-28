@@ -1,0 +1,59 @@
+id: l4-add-caching
+level: L4
+domain:
+  - reactor
+  - performance
+  - caching
+phases:
+  - plan
+  - design
+  - execute
+  - verify
+  - review
+  - complete
+fixture:
+  kind: template
+  path: reactor-skeleton-with-db
+instruction: |
+  Add caching to improve performance:
+  1. Add a caching layer (can be in-memory or Redis-based)
+  2. Cache the response of the most frequently accessed endpoint
+  3. Implement cache invalidation when data changes
+  4. Add cache headers to HTTP responses
+  5. Add a `/cache/stats` endpoint that shows cache hit/miss statistics
+success:
+  - kind: all
+    scorers:
+      - kind: cargo_check
+      - kind: regex_in
+        file: src/
+        pattern: "cache|Cache"
+      - kind: llm_judge
+        rubric: |
+          Evaluate the caching implementation:
+          
+          CORE REQUIREMENTS (each worth 20 points):
+          1. Cache mechanism is properly implemented (in-memory or external)
+          2. At least one endpoint has caching enabled
+          3. Cache invalidation occurs on data mutation
+          4. Cache-Control headers are set appropriately
+          5. Stats endpoint shows hit/miss counts
+          
+          QUALITY (each worth 5 points):
+          - TTL is configurable
+          - Cache key generation is sensible
+          - Error handling when cache is unavailable
+          - Documentation of caching strategy
+          
+          Score: Sum of points / 100 = final score
+        threshold: 0.7
+budget:
+  max_tool_calls: 80
+  max_tokens: 120000
+  max_wallclock_secs: 540
+runs_required: 1
+pass_threshold: 1.0
+model_pin:
+  provider: openrouter
+  model: anthropic/claude-sonnet-4
+  temperature: 0.2

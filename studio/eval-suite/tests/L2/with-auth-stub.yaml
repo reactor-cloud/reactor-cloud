@@ -1,0 +1,33 @@
+id: l2-with-auth-stub
+level: L2
+domain:
+  - reactor
+  - auth
+phases:
+  - plan
+  - execute
+  - verify
+fixture:
+  kind: tarball
+  path: reactor-blank.tar.gz
+instruction: |
+  Add a basic authentication middleware that checks for an `Authorization` header with a Bearer token. Create a protected `/api/me` endpoint that returns the user info if authenticated.
+success:
+  - kind: all
+    scorers:
+      - kind: cargo_check
+      - kind: regex_in
+        file: src/
+        pattern: "Authorization"
+      - kind: regex_in
+        file: src/
+        pattern: "Bearer"
+      - kind: regex_in
+        file: src/
+        pattern: "/api/me"
+budget:
+  max_tool_calls: 40
+  max_tokens: 60000
+  max_wallclock_secs: 240
+runs_required: 1
+pass_threshold: 1.0

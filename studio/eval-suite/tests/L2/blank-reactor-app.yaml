@@ -1,0 +1,27 @@
+id: l2-blank-reactor-app
+level: L2
+domain:
+  - reactor
+  - init
+phases:
+  - plan
+  - execute
+  - verify
+fixture:
+  kind: empty
+instruction: |
+  Initialize a new blank Reactor.cloud application in the current directory. Use the minimal configuration with just the essential files to make it deployable.
+success:
+  - kind: all
+    scorers:
+      - kind: file_exists
+        path: reactor.toml
+      - kind: file_exists
+        path: src/main.rs
+      - kind: cargo_check
+budget:
+  max_tool_calls: 30
+  max_tokens: 50000
+  max_wallclock_secs: 180
+runs_required: 1
+pass_threshold: 1.0

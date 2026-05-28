@@ -1,0 +1,81 @@
+[package]
+name = "reactor-jobs"
+version = "0.1.0"
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "Reactor Jobs — durable execution with step checkpointing"
+
+[dependencies]
+# Workspace crates
+reactor-core.workspace = true
+reactor-policy.workspace = true
+reactor-cache.workspace = true
+reactor-functions.workspace = true
+
+# Async runtime
+tokio.workspace = true
+
+# Web framework
+axum = { workspace = true, features = ["multipart"] }
+tower.workspace = true
+tower-http.workspace = true
+
+# Serialization
+serde.workspace = true
+serde_json.workspace = true
+
+# Database
+sqlx.workspace = true
+
+# IDs and time
+uuid.workspace = true
+chrono.workspace = true
+
+# Error handling
+thiserror.workspace = true
+
+# Observability
+tracing.workspace = true
+
+# Async utilities
+async-trait.workspace = true
+futures.workspace = true
+
+# Byte buffers
+bytes.workspace = true
+
+# Cron expression parsing
+cron.workspace = true
+
+# Regex and lazy init
+once_cell.workspace = true
+regex.workspace = true
+
+# Validation
+validator.workspace = true
+
+# Crypto (for webhook token encryption)
+base64.workspace = true
+aes-gcm.workspace = true
+rand.workspace = true
+sha2.workspace = true
+
+# Config
+figment.workspace = true
+
+# HTTP client
+url.workspace = true
+reqwest.workspace = true
+
+# OpenAPI
+utoipa.workspace = true
+
+[dev-dependencies]
+testcontainers.workspace = true
+testcontainers-modules.workspace = true
+tempfile = "3"
+tokio = { workspace = true, features = ["rt-multi-thread", "macros"] }
+reactor-auth.workspace = true
+tracing-subscriber.workspace = true

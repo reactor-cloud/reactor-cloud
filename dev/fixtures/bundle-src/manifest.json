@@ -1,0 +1,32 @@
+{
+  "project_id": "proj_dev_local",
+  "reactor_version": "0.1.0",
+  "created_at": "2024-01-01T00:00:00Z",
+  "capabilities": {
+    "data": {
+      "migrations": [
+        {
+          "name": "001_notes.sql",
+          "path": "migrations/data/001_notes.sql",
+          "sha256": "c80bc749f57c89d2b7050ee3fd4ffb9e580dadd2947c9ef511fe3afbf6327937"
+        }
+      ]
+    },
+    "functions": [
+      {
+        "name": "hello",
+        "path": "functions/hello.zip",
+        "sha256": "a5d67e25ffa0079b992950c8254246950a15a7c67be01aaf523dd7a731b9e9f1",
+        "runtime": "wasm"
+      }
+    ],
+    "jobs": [
+      {
+        "name": "heartbeat",
+        "function_name": "hello",
+        "path": "jobs/heartbeat.json",
+        "sha256": "498f611bd31baed39f0fd5cb02f8a9f518c638d6b53c90a95427ac97e6b05d97"
+      }
+    ]
+  }
+}

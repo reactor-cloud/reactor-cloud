@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Analytics E2E Test Page</title>
+</head>
+<body>
+  <h1>Analytics E2E Test</h1>
+  
+  <button id="track-btn" data-reactor-capture>Track Event</button>
+  <button id="identify-btn">Identify User</button>
+  <button id="page-btn">Track Page</button>
+  <a href="/about" id="nav-link" data-reactor-capture>About Page</a>
+  
+  <div id="output"></div>
+  
+  <script type="module">
+    import { ReactorAnalytics } from '/dist/index.js';
+
+    window.analytics = new ReactorAnalytics({
+      projectKey: 'pk_test_e2e',
+      endpoint: '/api/analytics',
+      debug: true,
+      autoPageview: true,
+      autoErrors: true,
+      autoCapture: true,
+    });
+
+    window.trackedEvents = [];
+
+    // Intercept fetch to capture events for testing
+    const originalFetch = window.fetch;
+    window.fetch = async (url, options) => {
+      if (url.toString().includes('/api/analytics')) {
+        const body = JSON.parse(options.body);
+        if (body.events) {
+          window.trackedEvents.push(...body.events);
+        }
+        document.getElementById('output').textContent = 
+          JSON.stringify(window.trackedEvents, null, 2);
+        return new Response(JSON.stringify({ success: true }), { status: 202 });
+      }
+      return originalFetch(url, options);
+    };
+
+    document.getElementById('track-btn').addEventListener('click', () => {
+      window.analytics.track('button_clicked', { button_id: 'track-btn' });
+    });
+
+    document.getElementById('identify-btn').addEventListener('click', () => {
+      window.analytics.identify('user_e2e_123', { email: 'e2e@test.com' });
+    });
+
+    document.getElementById('page-btn').addEventListener('click', () => {
+      window.analytics.page('Custom Page');
+    });
+  </script>
+</body>
+</html>

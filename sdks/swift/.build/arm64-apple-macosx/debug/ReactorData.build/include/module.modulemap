@@ -1,0 +1,3 @@
+module ReactorData {
+    header "/Users/cdelconde/Dev/Github/Lab/Reactor/sdks/swift/.build/arm64-apple-macosx/debug/ReactorData.build/include/ReactorData-Swift.h"
+}

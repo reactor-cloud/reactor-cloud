@@ -1,0 +1,34 @@
+[package]
+name = "reactor-deploy-bundle"
+version = "0.1.0"
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "Deploy bundle types and pack/unpack utilities for Reactor.cloud"
+
+[dependencies]
+# Serialization
+serde.workspace = true
+serde_json.workspace = true
+
+# Compression and archiving
+zstd = "0.13"
+tar = "0.4"
+
+# Hashing for content verification
+sha2.workspace = true
+hex.workspace = true
+
+# Error handling
+thiserror.workspace = true
+anyhow.workspace = true
+
+# Semver for version checking
+semver = "1"
+
+# Directory traversal for packing
+walkdir = "2"
+
+[dev-dependencies]
+tempfile = "3"

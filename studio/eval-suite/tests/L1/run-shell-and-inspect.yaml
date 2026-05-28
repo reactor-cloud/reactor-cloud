@@ -1,0 +1,25 @@
+id: l1-run-shell-and-inspect
+level: L1
+domain:
+  - tool
+  - shell
+phases:
+  - execute
+fixture:
+  kind: empty
+instruction: |
+  Run `node --version` to check the Node.js version, then create a file called `node_version.txt` containing just the version number (e.g., "v20.10.0").
+success:
+  - kind: all
+    scorers:
+      - kind: file_exists
+        path: node_version.txt
+      - kind: regex_in
+        file: node_version.txt
+        pattern: "^v\\d+\\.\\d+\\.\\d+"
+budget:
+  max_tool_calls: 10
+  max_tokens: 10000
+  max_wallclock_secs: 60
+runs_required: 1
+pass_threshold: 1.0

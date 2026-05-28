@@ -1,0 +1,97 @@
+[package]
+name = "reactor-connect"
+version = "0.1.0"
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "Reactor Connect — agent-shaped integration with third-party systems via Actions, Streams, and Webhooks"
+
+[features]
+default = ["runtime-native"]
+runtime-native = []
+runtime-manifest = ["dep:serde_yaml"]
+runtime-airbyte = []
+
+[dependencies]
+# Workspace crates
+reactor-core.workspace = true
+reactor-policy.workspace = true
+reactor-cache.workspace = true
+reactor-vault.workspace = true
+
+# Async runtime
+tokio.workspace = true
+
+# Web framework
+axum = { workspace = true, features = ["multipart"] }
+tower.workspace = true
+tower-http.workspace = true
+
+# Serialization
+serde.workspace = true
+serde_json.workspace = true
+serde_yaml = { version = "0.9", optional = true }
+
+# Database
+sqlx.workspace = true
+
+# IDs and time
+uuid.workspace = true
+chrono.workspace = true
+
+# Error handling
+thiserror.workspace = true
+
+# Observability
+tracing.workspace = true
+metrics.workspace = true
+
+# Async utilities
+async-trait.workspace = true
+futures.workspace = true
+async-stream = "0.3"
+
+# Byte buffers
+bytes.workspace = true
+
+# Cron expression parsing
+cron.workspace = true
+
+# Regex and lazy init
+once_cell.workspace = true
+regex.workspace = true
+
+# Validation
+validator.workspace = true
+
+# Crypto (for webhook signature verification + token encryption)
+base64.workspace = true
+hmac.workspace = true
+sha2.workspace = true
+aes-gcm.workspace = true
+rand.workspace = true
+hex.workspace = true
+
+# Config
+figment.workspace = true
+
+# HTTP client (for connector HTTP calls)
+url.workspace = true
+reqwest.workspace = true
+urlencoding = "2"
+
+# OAuth2
+oauth2.workspace = true
+
+# OpenAPI
+utoipa.workspace = true
+
+[dev-dependencies]
+testcontainers.workspace = true
+testcontainers-modules.workspace = true
+tempfile.workspace = true
+tokio = { workspace = true, features = ["rt-multi-thread", "macros"] }
+reactor-auth.workspace = true
+tracing-subscriber.workspace = true
+wiremock = "0.6"

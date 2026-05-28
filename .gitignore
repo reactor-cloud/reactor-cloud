@@ -1,0 +1,53 @@
+# Rust
+/target/
+**/target/
+**/*.rs.bk
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# SQLite (local dev)
+*.sqlite
+*.sqlite-journal
+*.sqlite-wal
+*.sqlite-shm
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# macOS
+.DS_Store
+
+# Local reactor state
+.reactor/
+
+# Top-level Reactor.toml (dev/Reactor.toml is committed)
+/Reactor.toml
+
+# Test artifacts
+*.profraw
+lcov.info
+
+# Local secrets (never commit)
+*.secrets.env
+.secrets.env
+
+# Node.js
+node_modules/
+*.tsbuildinfo
+
+# Build artifacts
+*.tar.zst
+
+# Next.js
+.next/
+out/
+
+# Cursor
+.cursor/

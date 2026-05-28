@@ -1,0 +1,27 @@
+id: l3-add-missing-import
+level: L3
+domain:
+  - reactor
+  - debug
+phases:
+  - analyze
+  - execute
+  - verify
+fixture:
+  kind: template
+  path: l3-missing-import-fixture
+instruction: |
+  The code is missing an import for `HashMap`. Find where it's used and add the missing import.
+success:
+  - kind: all
+    scorers:
+      - kind: cargo_check
+      - kind: regex_in
+        file: src/
+        pattern: "use.*HashMap"
+budget:
+  max_tool_calls: 15
+  max_tokens: 20000
+  max_wallclock_secs: 90
+runs_required: 1
+pass_threshold: 1.0

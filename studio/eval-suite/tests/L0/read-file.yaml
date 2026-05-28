@@ -1,0 +1,26 @@
+id: l0-read-file
+level: L0
+domain:
+  - tool
+  - file
+phases:
+  - execute
+fixture:
+  kind: template
+  path: l0-read-file-fixture
+instruction: |
+  Read the contents of `data.txt` and create a new file called `copy.txt` with the exact same content.
+success:
+  - kind: all
+    scorers:
+      - kind: file_exists
+        path: copy.txt
+      - kind: regex_in
+        file: copy.txt
+        pattern: "This is test data for the read file test"
+budget:
+  max_tool_calls: 5
+  max_tokens: 5000
+  max_wallclock_secs: 30
+runs_required: 1
+pass_threshold: 1.0

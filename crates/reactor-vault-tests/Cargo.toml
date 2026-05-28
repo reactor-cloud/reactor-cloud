@@ -1,0 +1,41 @@
+[package]
+name = "reactor-vault-tests"
+version = "0.1.0"
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "Integration tests for reactor-vault using testcontainers"
+publish = false
+
+[dependencies]
+# Only used for integration tests
+reactor-vault = { workspace = true, features = ["openbao"] }
+reactor-core = { workspace = true }
+
+# Async runtime
+tokio = { workspace = true, features = ["full", "test-util"] }
+
+# Testing
+testcontainers = { workspace = true }
+testcontainers-modules = { workspace = true, features = ["hashicorp_vault"] }
+
+# Property testing
+proptest = { workspace = true }
+
+# Utilities
+uuid = { workspace = true }
+url = { workspace = true }
+tracing = { workspace = true }
+tracing-subscriber = { workspace = true }
+base64 = { workspace = true }
+serde_json = { workspace = true }
+reqwest = { workspace = true }
+
+[lib]
+name = "reactor_vault_tests"
+path = "src/lib.rs"
+
+[[test]]
+name = "openbao_integration"
+path = "tests/openbao_integration.rs"

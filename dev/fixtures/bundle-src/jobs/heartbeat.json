@@ -1,0 +1,13 @@
+{
+  "triggers": [
+    { "kind": "manual" }
+  ],
+  "retry": {
+    "maxAttempts": 3,
+    "backoff": "exponential",
+    "initialDelayMs": 1000,
+    "maxDelayMs": 60000
+  },
+  "maxConcurrency": 1,
+  "timeoutMs": 30000
+}

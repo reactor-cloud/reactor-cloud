@@ -1,0 +1,3 @@
+module ReactorRealtime {
+    header "/Users/cdelconde/Dev/Github/Lab/Reactor/sdks/swift/.build/arm64-apple-macosx/debug/ReactorRealtime.build/include/ReactorRealtime-Swift.h"
+}

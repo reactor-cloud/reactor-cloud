@@ -1,0 +1,62 @@
+id: l4-add-deploy-preview
+level: L4
+domain:
+  - reactor
+  - devops
+  - ci
+phases:
+  - plan
+  - design
+  - execute
+  - verify
+  - review
+  - complete
+fixture:
+  kind: template
+  path: reactor-skeleton-basic
+instruction: |
+  Add a deploy preview workflow:
+  1. Create a GitHub Actions workflow file (.github/workflows/preview.yml)
+  2. The workflow should trigger on pull requests
+  3. Build the application and run tests
+  4. Deploy to a preview environment (can simulate with echo commands)
+  5. Post a comment on the PR with the preview URL
+  6. Clean up the preview environment when the PR is closed
+success:
+  - kind: all
+    scorers:
+      - kind: file_exists
+        path: .github/workflows/preview.yml
+      - kind: regex_in
+        file: .github/workflows/preview.yml
+        pattern: "pull_request"
+      - kind: llm_judge
+        rubric: |
+          Evaluate the deploy preview workflow:
+          
+          REQUIRED STEPS (each worth 15 points):
+          1. Triggers on pull_request open/synchronize/reopen
+          2. Builds the application
+          3. Runs tests before deploy
+          4. Deploys to preview environment (or simulates it)
+          5. Posts comment with preview URL
+          6. Has cleanup job for PR close event
+          
+          QUALITY (each worth 5 points):
+          - Uses caching for dependencies
+          - Has proper job dependencies/ordering
+          - Environment variables are not hardcoded
+          - Timeout and concurrency settings
+          
+          Score: Sum of points / 100 = final score
+        threshold: 0.7
+budget:
+  max_tool_calls: 60
+  max_tokens: 90000
+  max_wallclock_secs: 420
+runs_required: 1
+pass_threshold: 1.0
+model_pin:
+  provider: openrouter
+  model: anthropic/claude-sonnet-4
+  temperature: 0.2

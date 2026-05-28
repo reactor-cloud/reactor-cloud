@@ -1,0 +1,93 @@
+# Reactor.toml for local development
+# WARNING: Keys in this file are for local dev only. DO NOT USE IN PRODUCTION.
+
+[project]
+name = "reactor-dev"
+id = "proj_dev_local"
+
+[server]
+bind = "127.0.0.1:8000"
+request_timeout_secs = 30
+
+[database]
+url = "postgres://reactor:reactor@127.0.0.1:5434/reactor"
+pool_max = 10
+acquire_timeout_secs = 5
+
+[tracing]
+filter = "info,reactor_server=debug,reactor_auth=debug,reactor_data=debug,reactor_functions=debug,reactor_jobs=debug"
+fmt = "pretty"
+
+[admin]
+token = "dev-admin-token"
+allow_remote = false
+
+# =============================================================================
+# Auth capability
+# WARNING: These keys are for local dev only. Generate real keys for production.
+# =============================================================================
+[auth]
+# base64-encoded 32-byte key (echo -n '0123456789ABCDEF0123456789ABCDEF' | base64)
+data_key = "MDEyMzQ1Njc4OUFCQ0RFRjAxMjM0NTY3ODlBQkNERUY="
+jwt_issuer = "reactor-dev"
+jwt_audience = "reactor"
+access_ttl_secs = 3600
+refresh_ttl_secs = 2592000
+public_url = "http://localhost:8000"
+
+# =============================================================================
+# Data capability
+# =============================================================================
+[data]
+migrations_dir = "./migrations"
+run_migrations = false
+user_schema = "public"
+max_embed_depth = 5
+max_limit = 1000
+default_limit = 100
+
+# =============================================================================
+# Storage capability
+# WARNING: signing_secret is for local dev only.
+# =============================================================================
+[storage]
+backend = "fs"
+fs_base_path = "./.reactor/blobs"
+signing_secret = "dev-signing-secret-do-not-use-in-production"
+signed_url_expiry_secs = 3600
+max_upload_size = 104857600
+
+# =============================================================================
+# Functions capability
+# WARNING: data_key is for local dev only.
+# =============================================================================
+[functions]
+workdir = "./.reactor/functions"
+# base64-encoded 32-byte key
+data_key = "ZGV2LWZ1bmN0aW9ucy1kYXRhLWtleS0zMi1ieXRlcw=="
+runtimes = ["wasm"]
+invoke_default_timeout_ms = 30000
+invoke_max_timeout_ms = 300000
+bundle_max_bytes = 52428800
+
+# =============================================================================
+# Jobs capability
+# WARNING: webhook_secret is for local dev only.
+# =============================================================================
+[jobs]
+worker_count = 2
+scheduler_interval_ms = 1000
+default_timeout_ms = 600000
+max_timeout_ms = 3600000
+webhook_secret = "dev-webhook-secret-do-not-use-in-production"
+max_org_concurrent_runs = 50
+max_payload_bytes = 1048576
+
+# =============================================================================
+# Sites capability
+# =============================================================================
+[sites]
+workdir = "./.reactor/sites"
+bundle_max_bytes = 524288000
+isr_enabled = true
+isr_default_revalidate_secs = 60

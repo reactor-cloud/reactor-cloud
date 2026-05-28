@@ -1,0 +1,29 @@
+id: l1-search-then-edit
+level: L1
+domain:
+  - tool
+  - file
+  - search
+phases:
+  - plan
+  - execute
+fixture:
+  kind: template
+  path: l1-search-fixture
+instruction: |
+  Search for any file containing the word "DEPRECATED" and replace all occurrences of "DEPRECATED" with "LEGACY" in those files.
+success:
+  - kind: all
+    scorers:
+      - kind: command_exit
+        cmd: "! grep -r 'DEPRECATED' ."
+        exit_code: 0
+      - kind: regex_in
+        file: src/old_api.ts
+        pattern: "LEGACY"
+budget:
+  max_tool_calls: 15
+  max_tokens: 20000
+  max_wallclock_secs: 90
+runs_required: 1
+pass_threshold: 1.0

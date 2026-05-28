@@ -1,0 +1,34 @@
+[package]
+name = "studio-eval"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "Eval framework for Reactor Studio Foundry: test runner, scorers, worktree isolation, replay"
+
+[features]
+default = []
+foundry = []
+
+[dependencies]
+studio-protocol = { path = "../studio-protocol" }
+studio-providers = { path = "../studio-providers" }
+studio-agent = { path = "../studio-agent" }
+studio-tools = { path = "../studio-tools" }
+studio-lessons = { path = "../studio-lessons" }
+serde = { workspace = true }
+serde_json = { workspace = true }
+serde_yaml = { workspace = true }
+tokio = { workspace = true }
+thiserror = { workspace = true }
+chrono = { workspace = true }
+uuid = { workspace = true }
+async-trait = { workspace = true }
+futures = { workspace = true }
+tracing = { workspace = true }
+regex = { workspace = true }
+sha2 = { workspace = true }
+hex = { workspace = true }
+tempfile = { workspace = true }
+
+[dev-dependencies]
+tempfile = { workspace = true }

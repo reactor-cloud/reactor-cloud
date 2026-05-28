@@ -1,0 +1,108 @@
+# Pipedrive Connector Manifest
+# License: MIT (Airbyte Low-Code CDK compatible)
+version: "0.1.0"
+type: DeclarativeSource
+
+definitions:
+  api_key_authenticator:
+    type: ApiKeyAuthenticator
+    header: api_token
+    api_token: "{{ config['api_token'] }}"
+
+  base_requester:
+    type: HttpRequester
+    url_base: "https://api.pipedrive.com/v1"
+    authenticator:
+      $ref: "#/definitions/api_key_authenticator"
+    http_method: GET
+
+  offset_paginator:
+    type: DefaultPaginator
+    pagination_strategy:
+      type: OffsetIncrement
+      page_size: 100
+    page_token_option:
+      type: RequestOption
+      inject_into: request_parameter
+      field_name: start
+    page_size_option:
+      type: RequestOption
+      inject_into: request_parameter
+      field_name: limit
+
+  base_retriever:
+    type: SimpleRetriever
+    requester:
+      $ref: "#/definitions/base_requester"
+    paginator:
+      $ref: "#/definitions/offset_paginator"
+    record_selector:
+      type: RecordSelector
+      extractor:
+        type: DpathExtractor
+        field_path: ["data"]
+
+  deals_stream:
+    type: DeclarativeStream
+    name: deals
+    primary_key: id
+    retriever:
+      $ref: "#/definitions/base_retriever"
+      requester:
+        $ref: "#/definitions/base_requester"
+        path: /deals
+
+  persons_stream:
+    type: DeclarativeStream
+    name: persons
+    primary_key: id
+    retriever:
+      $ref: "#/definitions/base_retriever"
+      requester:
+        $ref: "#/definitions/base_requester"
+        path: /persons
+
+  organizations_stream:
+    type: DeclarativeStream
+    name: organizations
+    primary_key: id
+    retriever:
+      $ref: "#/definitions/base_retriever"
+      requester:
+        $ref: "#/definitions/base_requester"
+        path: /organizations
+
+  activities_stream:
+    type: DeclarativeStream
+    name: activities
+    primary_key: id
+    retriever:
+      $ref: "#/definitions/base_retriever"
+      requester:
+        $ref: "#/definitions/base_requester"
+        path: /activities
+
+check:
+  type: CheckStream
+  stream_names:
+    - deals
+
+spec:
+  type: Spec
+  connection_specification:
+    $schema: http://json-schema.org/draft-07/schema#
+    type: object
+    required:
+      - api_token
+    properties:
+      api_token:
+        type: string
+        title: API Token
+        description: Your Pipedrive API token
+        airbyte_secret: true
+
+streams:
+  - $ref: "#/definitions/deals_stream"
+  - $ref: "#/definitions/persons_stream"
+  - $ref: "#/definitions/organizations_stream"
+  - $ref: "#/definitions/activities_stream"

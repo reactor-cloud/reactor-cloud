@@ -1,0 +1,11 @@
+[package]
+name = "studio-memory"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[dependencies]
+studio-protocol = { path = "../studio-protocol" }
+studio-storage = { path = "../studio-storage" }
+serde = { workspace = true }
+serde_json = { workspace = true }

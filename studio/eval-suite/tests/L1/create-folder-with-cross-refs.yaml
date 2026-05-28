@@ -1,0 +1,33 @@
+id: l1-create-folder-with-cross-refs
+level: L1
+domain:
+  - tool
+  - file
+  - structure
+phases:
+  - plan
+  - execute
+fixture:
+  kind: empty
+instruction: |
+  Create a `utils` folder with two files:
+  1. `utils/constants.ts` exporting a constant `API_URL = "https://api.example.com"`
+  2. `utils/helpers.ts` that imports `API_URL` from `./constants` and exports a function `getApiUrl()` that returns it
+success:
+  - kind: all
+    scorers:
+      - kind: file_exists
+        path: utils/constants.ts
+        contains: "API_URL"
+      - kind: file_exists
+        path: utils/helpers.ts
+        contains: "./constants"
+      - kind: regex_in
+        file: utils/helpers.ts
+        pattern: "getApiUrl"
+budget:
+  max_tool_calls: 10
+  max_tokens: 15000
+  max_wallclock_secs: 60
+runs_required: 1
+pass_threshold: 1.0

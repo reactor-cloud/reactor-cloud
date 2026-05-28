@@ -1,0 +1,3 @@
+setting1=true
+setting2=OLD_VALUE
+setting3=enabled

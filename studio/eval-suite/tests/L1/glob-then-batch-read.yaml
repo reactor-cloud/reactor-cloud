@@ -1,0 +1,28 @@
+id: l1-glob-then-batch-read
+level: L1
+domain:
+  - tool
+  - file
+  - batch
+phases:
+  - plan
+  - execute
+fixture:
+  kind: template
+  path: l1-glob-fixture
+instruction: |
+  Find all `.ts` files in the `src` directory, read their contents, and create a `summary.md` file listing each file path and its first line of content.
+success:
+  - kind: all
+    scorers:
+      - kind: file_exists
+        path: summary.md
+      - kind: regex_in
+        file: summary.md
+        pattern: "src/.*\\.ts"
+budget:
+  max_tool_calls: 20
+  max_tokens: 25000
+  max_wallclock_secs: 120
+runs_required: 1
+pass_threshold: 1.0

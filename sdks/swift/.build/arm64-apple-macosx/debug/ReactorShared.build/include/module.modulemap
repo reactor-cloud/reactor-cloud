@@ -1,0 +1,3 @@
+module ReactorShared {
+    header "/Users/cdelconde/Dev/Github/Lab/Reactor/sdks/swift/.build/arm64-apple-macosx/debug/ReactorShared.build/include/ReactorShared-Swift.h"
+}

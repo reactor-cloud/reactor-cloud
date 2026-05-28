@@ -1,0 +1,27 @@
+id: l3-add-db-column
+level: L3
+domain:
+  - reactor
+  - database
+phases:
+  - plan
+  - execute
+  - verify
+fixture:
+  kind: template
+  path: reactor-skeleton-with-db
+instruction: |
+  Add a `last_login_at` timestamp column to track when users last logged in. Create the migration and update any relevant model structs.
+success:
+  - kind: all
+    scorers:
+      - kind: cargo_check
+      - kind: regex_in
+        file: migrations/
+        pattern: "last_login"
+budget:
+  max_tool_calls: 35
+  max_tokens: 50000
+  max_wallclock_secs: 200
+runs_required: 1
+pass_threshold: 1.0

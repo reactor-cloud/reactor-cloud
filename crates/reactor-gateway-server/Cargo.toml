@@ -1,0 +1,44 @@
+[package]
+name = "reactor-gateway-server"
+version = "0.1.0"
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "Edge gateway server for Reactor - runs the sync loop and on-demand TLS endpoint"
+
+[[bin]]
+name = "reactor-gateway-server"
+path = "src/main.rs"
+
+[dependencies]
+# Workspace crates
+reactor-core = { workspace = true }
+reactor-gateway = { workspace = true, features = ["postgres"] }
+
+# Async runtime
+tokio = { workspace = true, features = ["full", "signal"] }
+
+# Web framework
+axum = { workspace = true }
+
+# Database
+sqlx = { workspace = true, features = ["postgres", "runtime-tokio-rustls"] }
+
+# Configuration
+serde = { workspace = true, features = ["derive"] }
+serde_json = { workspace = true }
+
+# Error handling
+thiserror = { workspace = true }
+
+# Logging
+tracing = { workspace = true }
+tracing-subscriber = { workspace = true, features = ["env-filter", "json"] }
+
+# Utilities
+url = { workspace = true }
+uuid = { workspace = true }
+clap = { workspace = true, features = ["derive", "env"] }
+anyhow = { workspace = true }
+async-trait = { workspace = true }

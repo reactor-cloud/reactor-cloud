@@ -1,0 +1,54 @@
+[package]
+name = "reactor-sites-server"
+version = "0.1.0"
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "Reactor Sites server binary"
+
+[[bin]]
+name = "reactor-sites-server"
+path = "src/main.rs"
+
+[features]
+default = ["framework-static", "framework-hono", "framework-nextjs"]
+framework-static = ["reactor-sites/framework-static"]
+framework-hono = ["reactor-sites/framework-hono"]
+framework-nextjs = ["reactor-sites/framework-nextjs"]
+domain-acme = ["reactor-sites/domain-acme"]
+
+[dependencies]
+# Workspace crates
+reactor-core.workspace = true
+reactor-sites.workspace = true
+reactor-auth.workspace = true
+reactor-cache.workspace = true
+
+# Async runtime
+tokio.workspace = true
+
+# Web framework
+axum.workspace = true
+tower.workspace = true
+tower-http.workspace = true
+
+# Serialization
+serde.workspace = true
+serde_json.workspace = true
+
+# Database
+sqlx.workspace = true
+
+# Error handling
+anyhow.workspace = true
+
+# Observability
+tracing.workspace = true
+tracing-subscriber.workspace = true
+
+# HTTP client
+reqwest.workspace = true
+
+# Config
+figment.workspace = true

@@ -1,0 +1,85 @@
+[package]
+name = "reactor-storage"
+version = "0.1.0"
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "Reactor Storage capability — S3-shaped HTTP surface with dual FS/S3 backends"
+
+[features]
+default = ["fs"]
+fs = []
+s3 = ["aws-sdk-s3", "aws-config"]
+
+[dependencies]
+# Workspace crates
+reactor-core.workspace = true
+reactor-policy.workspace = true
+
+# Async runtime
+tokio.workspace = true
+
+# Web framework
+axum.workspace = true
+tower.workspace = true
+tower-http.workspace = true
+
+# Serialization
+serde.workspace = true
+serde_json.workspace = true
+
+# Database
+sqlx.workspace = true
+
+# IDs and time
+uuid.workspace = true
+chrono.workspace = true
+
+# Error handling
+thiserror.workspace = true
+
+# Observability
+tracing.workspace = true
+
+# Async utilities
+async-trait.workspace = true
+futures.workspace = true
+
+# Byte buffers
+bytes.workspace = true
+
+# Regex and lazy init
+once_cell.workspace = true
+regex.workspace = true
+
+# Validation
+validator.workspace = true
+
+# Crypto (for signed URLs)
+base64.workspace = true
+sha2.workspace = true
+hex.workspace = true
+hmac.workspace = true
+
+# Config
+figment.workspace = true
+
+# HTTP client (for RemoteAuthClient)
+url.workspace = true
+reqwest.workspace = true
+
+# OpenAPI
+utoipa.workspace = true
+
+# S3 SDK (optional)
+aws-sdk-s3 = { version = "1", optional = true }
+aws-config = { version = "1", optional = true }
+
+[dev-dependencies]
+testcontainers.workspace = true
+testcontainers-modules.workspace = true
+tempfile = "3"
+tokio = { workspace = true, features = ["rt-multi-thread", "macros"] }
+reactor-auth.workspace = true
+tracing-subscriber.workspace = true

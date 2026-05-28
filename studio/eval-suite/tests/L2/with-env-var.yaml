@@ -1,0 +1,30 @@
+id: l2-with-env-var
+level: L2
+domain:
+  - reactor
+  - config
+phases:
+  - plan
+  - execute
+  - verify
+fixture:
+  kind: tarball
+  path: reactor-blank.tar.gz
+instruction: |
+  Add support for a `DATABASE_URL` environment variable. Update the config to read it, add it to .env.example, and use it in the database connection setup.
+success:
+  - kind: all
+    scorers:
+      - kind: cargo_check
+      - kind: file_exists
+        path: .env.example
+        contains: "DATABASE_URL"
+      - kind: regex_in
+        file: src/
+        pattern: "DATABASE_URL"
+budget:
+  max_tool_calls: 30
+  max_tokens: 50000
+  max_wallclock_secs: 180
+runs_required: 1
+pass_threshold: 1.0

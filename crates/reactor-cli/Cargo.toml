@@ -1,0 +1,99 @@
+[package]
+name = "reactor-cli"
+version = "0.1.0"
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "Command-line interface for Reactor"
+
+[[bin]]
+name = "reactor"
+path = "src/main.rs"
+
+[features]
+default = ["dev", "keyring", "framework-build", "browser-login"]
+dev = ["dep:reactor-server"]
+keyring = ["dep:keyring"]
+connect-oauth = ["dep:webbrowser"]
+browser-login = ["dep:webbrowser", "dep:base64", "dep:rand"]
+framework-build = ["dep:reactor-sites"]
+
+[dependencies]
+# CLI framework
+clap = { workspace = true }
+clap_complete = { workspace = true }
+
+# Output formatting
+console = { workspace = true }
+indicatif = { workspace = true }
+
+# Config file editing
+toml_edit = { workspace = true }
+dirs = { workspace = true }
+
+# Async runtime
+tokio = { workspace = true, features = ["rt-multi-thread", "macros", "signal"] }
+
+# Serialization
+serde = { workspace = true }
+serde_json = { workspace = true }
+
+# Error handling
+thiserror = { workspace = true }
+anyhow = { workspace = true }
+
+# Tracing
+tracing = { workspace = true }
+tracing-subscriber = { workspace = true }
+
+# HTTP client
+url = { workspace = true }
+reqwest = { workspace = true }
+
+# IDs and time
+uuid = { workspace = true }
+chrono = { workspace = true }
+
+# File walking
+walkdir = { workspace = true }
+
+# Version comparison
+semver = { workspace = true }
+
+# Archive creation
+tar = { workspace = true }
+zstd = { workspace = true }
+zip = { workspace = true }
+
+# Hashing
+sha2 = { workspace = true }
+hex = { workspace = true }
+
+# Signal handling
+ctrlc = { workspace = true }
+
+# Config loading
+figment = { workspace = true }
+dotenvy = { workspace = true }
+
+# Workspace crates
+reactor-client = { workspace = true }
+reactor-deploy-bundle = { workspace = true }
+reactor-sites = { workspace = true, optional = true }
+
+# Optional: embedded server for dev mode
+reactor-server = { workspace = true, optional = true }
+
+# Optional: OS keychain for token storage
+keyring = { workspace = true, optional = true }
+
+# Optional: browser opening for OAuth flows
+webbrowser = { version = "1", optional = true }
+
+# Optional: PKCE login dependencies
+base64 = { workspace = true, optional = true }
+rand = { workspace = true, optional = true }
+urlencoding = { workspace = true }
+
+[dev-dependencies]
+tempfile = { workspace = true }

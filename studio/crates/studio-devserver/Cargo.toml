@@ -1,0 +1,44 @@
+[package]
+name = "studio-devserver"
+version = "0.1.0"
+edition = "2021"
+description = "Development server for Reactor Studio testing"
+
+[[bin]]
+name = "devserver"
+path = "src/main.rs"
+
+[dependencies]
+axum = { version = "0.7", features = ["macros"] }
+tokio = { version = "1", features = ["full"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+tower = "0.4"
+tower-http = { version = "0.5", features = ["cors"] }
+thiserror = "1"
+chrono = { version = "0.4", features = ["serde"] }
+uuid = { version = "1", features = ["v4"] }
+rand = "0.8"
+base64 = "0.22"
+tracing = "0.1"
+tracing-subscriber = "0.3"
+futures-util = "0.3"
+
+# Studio crates
+studio-storage = { path = "../studio-storage" }
+studio-protocol = { path = "../studio-protocol" }
+studio-providers = { path = "../studio-providers" }
+studio-agent = { path = "../studio-agent" }
+
+# For cancellation tokens
+tokio-util = "0.7"
+
+# For OS keyring access
+keyring = "3"
+
+# Tauri integration (optional, for app-embedded mode)
+tauri = { version = "2", optional = true }
+
+[features]
+default = []
+tauri-integration = ["tauri"]

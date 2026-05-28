@@ -1,0 +1,30 @@
+id: l3-refactor-function
+level: L3
+domain:
+  - reactor
+  - refactor
+phases:
+  - plan
+  - execute
+  - verify
+fixture:
+  kind: template
+  path: l3-refactor-fixture
+instruction: |
+  The `process_data` function is too long. Extract the validation logic into a separate `validate_input` function and the transformation logic into a `transform_data` function.
+success:
+  - kind: all
+    scorers:
+      - kind: cargo_check
+      - kind: regex_in
+        file: src/
+        pattern: "fn validate_input"
+      - kind: regex_in
+        file: src/
+        pattern: "fn transform_data"
+budget:
+  max_tool_calls: 35
+  max_tokens: 50000
+  max_wallclock_secs: 200
+runs_required: 1
+pass_threshold: 1.0

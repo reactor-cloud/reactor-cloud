@@ -1,0 +1,43 @@
+[package]
+name = "reactor-cache"
+version = "0.1.0"
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "Reactor Cache — queue + KV abstraction with Postgres backend"
+
+[dependencies]
+# Async runtime
+tokio.workspace = true
+
+# Database
+sqlx.workspace = true
+
+# Serialization
+serde.workspace = true
+serde_json.workspace = true
+
+# IDs and time
+uuid.workspace = true
+chrono.workspace = true
+
+# Error handling
+thiserror.workspace = true
+
+# Observability
+tracing.workspace = true
+
+# Async utilities
+async-trait.workspace = true
+
+# Byte buffers
+bytes.workspace = true
+
+# Core types and traits
+reactor-core.workspace = true
+
+[dev-dependencies]
+testcontainers.workspace = true
+testcontainers-modules.workspace = true
+tokio = { workspace = true, features = ["rt-multi-thread", "macros"] }

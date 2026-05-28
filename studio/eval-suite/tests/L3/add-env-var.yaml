@@ -1,0 +1,30 @@
+id: l3-add-env-var
+level: L3
+domain:
+  - reactor
+  - config
+phases:
+  - plan
+  - execute
+  - verify
+fixture:
+  kind: template
+  path: reactor-skeleton-basic
+instruction: |
+  Add support for an `API_KEY` environment variable. Update the main.rs to read it and print a warning if it's not set. Add it to a new .env.example file.
+success:
+  - kind: all
+    scorers:
+      - kind: cargo_check
+      - kind: file_exists
+        path: .env.example
+        contains: "API_KEY"
+      - kind: regex_in
+        file: src/main.rs
+        pattern: "API_KEY"
+budget:
+  max_tool_calls: 30
+  max_tokens: 40000
+  max_wallclock_secs: 180
+runs_required: 1
+pass_threshold: 1.0

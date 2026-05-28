@@ -1,0 +1,34 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+  "entryPoints": [
+    "packages/shared/src/index.ts",
+    "packages/auth/src/index.ts",
+    "packages/data/src/index.ts",
+    "packages/storage/src/index.ts",
+    "packages/functions/src/index.ts",
+    "packages/jobs/src/index.ts",
+    "packages/sites/src/index.ts",
+    "packages/realtime/src/index.ts",
+    "packages/client/src/index.ts"
+  ],
+  "out": "docs/api",
+  "plugin": ["typedoc-plugin-markdown"],
+  "readme": "none",
+  "entryPointStrategy": "expand",
+  "exclude": ["**/node_modules/**", "**/*.test.ts", "**/*.spec.ts"],
+  "excludePrivate": true,
+  "excludeProtected": true,
+  "excludeInternal": true,
+  "githubPages": false,
+  "hideGenerator": true,
+  "sort": ["source-order"],
+  "categoryOrder": ["*"],
+  "groupOrder": ["Functions", "Classes", "Interfaces", "Type Aliases", "Variables"],
+  "kindSortOrder": ["Function", "Class", "Interface", "TypeAlias", "Variable"],
+  "navigation": {
+    "includeCategories": true,
+    "includeGroups": true
+  },
+  "outputFileStrategy": "modules",
+  "skipErrorChecking": true
+}
